@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ABO MALEK STORE - متجر شحن شدات ببجي | عروض العيد</title>
+  <!-- favicon & logo -->
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/X799S1LZ/ABO-MALEK.jpg">
+  <!-- fonts and icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --accent: #f5a623;
+      --accent-light: #ffcd7e;
+      --accent-dark: #c47d0e;
+      --bg-dark: #05070c;
+      --bg-card: #0e111a;
+      --bg-elevated: #131723;
+      --border-dim: rgba(245, 166, 35, 0.2);
+      --text-primary: #f0ede8;
+      --text-muted: #9a8e7a;
+      --success: #2ec4b6;
+      --error: #e63946;
+      --eid-gold: #ffd966;
+      --shadow-glow: 0 8px 20px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,166,35,0.1);
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* noise & subtle gradient */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at 20% 30%, rgba(245,166,35,0.02), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* modern sticky header */
+    .glass-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5,7,12,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .header-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 2px solid var(--accent);
+      object-fit: cover;
+      background: #111;
+      transition: transform 0.2s;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.02);
+    }
+
+    .brand-name {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #f5b042, #ffdd99);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 8px rgba(245,166,35,0.3);
+    }
+
+    /* hero */
+    .hero-modern {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+
+    .badge-accent {
+      display: inline-flex;
+      background: rgba(245,166,35,0.12);
+      border: 1px solid var(--border-dim);
+      border-radius: 60px;
+      padding: 6px 18px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 24px;
+      gap: 8px;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-modern h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 7vw, 3.8rem);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(120deg, #f5a623, #ffcf7a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      max-width: 550px;
+      margin: 0 auto 36px;
+      font-size: 1.05rem;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    /* layout grid */
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 32px;
+      margin: 40px 0 60px;
+    }
+
+    @media (max-width: 820px) {
+      .two-columns {
+        grid-template-columns: 1fr;
+      }
+      .form-sticky {
+        position: relative;
+        top: 0;
+      }
+    }
+
+    /* products panel */
+    .tab-header {
+      display: flex;
+      gap: 12px;
+      background: var(--bg-elevated);
+      padding: 6px;
+      border-radius: 60px;
+      width: fit-content;
+      margin-bottom: 28px;
+      border: 1px solid var(--border-dim);
+    }
+
+    .tab-btn {
+      padding: 10px 26px;
+      border-radius: 40px;
+      background: transparent;
+      border: none;
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #0a0a0a;
+      box-shadow: 0 2px 8px rgba(245,166,35,0.3);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+    }
+
+    .product-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dim);
+      border-radius: 20px;
+      padding: 16px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* عروض العيد badge */
+    .eid-offer-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: linear-gradient(135deg, #e68a2e, #f5a623);
+      color: #000;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 30px;
+      z-index: 2;
+      font-family: 'Orbitron', monospace;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .product-item:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      background: #121724;
+    }
+
+    .product-item.selected {
+      border: 2px solid var(--accent);
+      background: rgba(245,166,35,0.08);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .check-mark {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--accent);
+      width: 24px;
+      height: 24px;
+      border-radius: 30px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: black;
+    }
+
+    .product-item.selected .check-mark {
+      display: flex;
+    }
+
+    .product-img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+    }
+
+    .product-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .product-price {
+      font-family: 'Orbitron', monospace;
+      color: var(--accent);
+      font-weight: 700;
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      font-size: 0.7rem;
+      color: #aa8c60;
+      margin-right: 5px;
+    }
+
+    /* form card */
+    .form-sticky {
+      position: sticky;
+      top: 90px;
+    }
+
+    .order-card {
+      background: var(--bg-elevated);
+      border-radius: 28px;
+      border: 1px solid var(--border-dim);
+      padding: 28px 24px;
+      backdrop-filter: blur(4px);
+    }
+
+    .order-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-field {
+      margin-bottom: 20px;
+    }
+
+    .input-field label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .input-field input, .input-field textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border-dim);
+      border-radius: 16px;
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-family: 'Tajawal', sans-serif;
+      transition: 0.2s;
+    }
+
+    .input-field input:focus, .input-field textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(245,166,35,0.05);
+    }
+
+    .coupon-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .coupon-group input {
+      flex: 1;
+    }
+
+    .coupon-btn {
+      background: rgba(245,166,35,0.1);
+      border: 1px solid var(--border-dim);
+      border-radius: 16px;
+      padding: 0 18px;
+      font-weight: 700;
+      color: var(--accent);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .coupon-btn:hover {
+      background: rgba(245,166,35,0.25);
+    }
+
+    .total-row {
+      background: #0b0f18;
+      border-radius: 20px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      border: 1px solid rgba(245,166,35,0.2);
+    }
+
+    .total-label {
+      font-weight: 500;
+    }
+
+    .total-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .btn-glow {
+      width: 100%;
+      background: linear-gradient(105deg, #d49216, var(--accent), #f5bc5e);
+      border: none;
+      border-radius: 28px;
+      padding: 16px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      color: #0e0e0e;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-glow:hover {
+      transform: scale(0.98);
+      box-shadow: 0 8px 28px rgba(245,166,35,0.4);
+    }
+
+    .selected-badge {
+      background: rgba(46,196,182,0.1);
+      padding: 12px;
+      border-radius: 18px;
+      margin-bottom: 20px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      border-right: 3px solid var(--success);
+    }
+
+    .selected-badge.show {
+      display: flex;
+    }
+
+    /* contact area */
+    .contact-wrapper {
+      background: var(--bg-elevated);
+      border-radius: 28px;
+      border: 1px solid var(--border-dim);
+      margin: 30px 0 40px;
+      overflow: hidden;
+    }
+
+    .contact-summary {
+      padding: 20px 28px;
+      font-weight: 800;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      background: rgba(245,166,35,0.02);
+      list-style: none;
+      transition: 0.2s;
+    }
+
+    .contact-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .contact-summary::before {
+      content: '\f054';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      font-size: 0.9rem;
+      transition: transform 0.25s;
+    }
+
+    details[open] .contact-summary::before {
+      transform: rotate(90deg);
+    }
+
+    .contact-inner {
+      padding: 24px 28px;
+      border-top: 1px solid var(--border-dim);
+    }
+
+    .contact-tab-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .contact-tab {
+      flex: 1;
+      background: transparent;
+      border: 1px solid var(--border-dim);
+      border-radius: 40px;
+      padding: 10px;
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .contact-tab.active {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+
+    .contact-form-pane {
+      display: none;
+    }
+
+    .contact-form-pane.active {
+      display: block;
+    }
+
+    /* policies */
+    .policies-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 40px 0 50px;
+    }
+
+    .policy-details {
+      background: var(--bg-card);
+      border-radius: 20px;
+      border: 1px solid var(--border-dim);
+      overflow: hidden;
+    }
+
+    .policy-summary {
+      padding: 18px 22px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--text-muted);
+    }
+
+    .policy-content {
+      padding: 0 24px 24px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      border-top: 1px solid var(--border-dim);
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      border-top: 1px solid var(--border-dim);
+      margin-top: 20px;
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .toast {
+      background: #0f141f;
+      border-right: 4px solid var(--accent);
+      padding: 12px 18px;
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      min-width: 240px;
+      font-size: 0.85rem;
+      box-shadow: 0 8px 20px black;
+      animation: slideUp 0.2s ease;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .disabled-btn {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    @media (max-width: 520px) {
+      .container { padding: 0 16px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="glass-header">
+  <div class="header-flex">
+    <a href="#" class="logo-wrapper">
+      <img src="https://i.postimg.cc/X799S1LZ/ABO-MALEK.jpg" class="logo-img" alt="ABO MALEK STORE">
+      <span class="brand-name">ABO MALEK STORE</span>
+    </a>
+  </div>
+</div>
+
+<main class="container">
+  <div class="hero-modern">
+    <div class="badge-accent">
+      <i class="fas fa-bolt"></i> شحن فوري وآمن
+    </div>
+    <h1>ABO MALEK <span class="gradient-text">STORE</span></h1>
+    <p class="hero-sub">أسرع متجر لشحن شدات ببجي وUC | دعم VIP وتنفيذ فوري | 🎉 عروض العيد</p>
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-number">+750</div><div>عميل وثق بنا</div></div>
+      <div class="stat-item"><div class="stat-number">دقائق</div><div>سرعة التوصيل</div></div>
+      <div class="stat-item"><div class="stat-number">100%</div><div>ضمان الاستلام</div></div>
+    </div>
+  </div>
+
+  <div class="two-columns">
+    <!-- products side -->
+    <div>
+      <div class="tab-header">
+        <button class="tab-btn active" data-tab="uc">شدات UC <i class="fas fa-coins"></i></button>
+        <button class="tab-btn" data-tab="bundles">حزم ازدهار <i class="fas fa-gift"></i></button>
+      </div>
+      <!-- UC grid -->
+      <div id="ucProducts" class="products-grid active-tab"></div>
+      <div id="bundleProducts" class="products-grid" style="display: none;"></div>
+    </div>
+
+    <!-- order form -->
+    <div class="form-sticky">
+      <div class="order-card">
+        <h3><i class="fas fa-cart-shopping"></i> تفاصيل الطلب</h3>
+        <div id="selectedInfoBox" class="selected-badge"><i class="fas fa-check-circle"></i> <span id="selectedItemText"></span></div>
+        <form id="mainOrderForm">
+          <div class="input-field"><label>الاسم داخل اللعبة</label><input type="text" id="ign" placeholder="اسم الشخصية" required></div>
+          <div class="input-field"><label>Player ID</label><input type="text" id="playerId" placeholder="معرف اللاعب" required></div>
+          <div class="input-field"><label>البريد الإلكتروني</label><input type="email" id="emailUser" placeholder="بريدك الإلكتروني" required></div>
+          <div class="input-field"><label>كود الخصم (اختياري)</label><div class="coupon-group"><input type="text" id="couponInput" placeholder="أدخل الكود"><button type="button" id="applyCouponBtn" class="coupon-btn">تطبيق</button></div><div id="couponMsg" class="coupon-msg" style="font-size:12px; margin-top:5px;"></div></div>
+          <div class="total-row"><span class="total-label">الإجمالي</span><span class="total-value" id="totalAmountSpan">0 ج.م</span></div>
+          <button type="submit" id="orderSubmitBtn" class="btn-glow"><i class="fas fa-arrow-left"></i> إتمام الطلب</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- contact -->
+  <details class="contact-wrapper">
+    <summary class="contact-summary"><i class="fas fa-headset"></i> مركز الدعم والمساعدة</summary>
+    <div class="contact-inner">
+      <div class="contact-tab-group">
+        <button class="contact-tab active" data-contact="inquiry">استفسار</button>
+        <button class="contact-tab" data-contact="suggestion">اقتراح</button>
+      </div>
+      <div id="inquiryPane" class="contact-form-pane active">
+        <form id="inquiryForm">
+          <div class="input-field"><label>الاسم</label><input type="text" id="inqName" required></div>
+          <div class="input-field"><label>البريد الإلكتروني</label><input type="email" id="inqEmail" required></div>
+          <div class="input-field"><label>الرسالة</label><textarea rows="3" id="inqMsg" required></textarea></div>
+          <button type="submit" class="btn-glow" style="background:#333; color:var(--accent);">إرسال الاستفسار</button>
+        </form>
+      </div>
+      <div id="suggestionPane" class="contact-form-pane">
+        <form id="suggestionForm">
+          <div class="input-field"><label>الاسم</label><input type="text" id="sugName" required></div>
+          <div class="input-field"><label>وسيلة التواصل</label><input type="text" id="sugContact" placeholder="هاتف أو بريد" required></div>
+          <div class="input-field"><label>الاقتراح</label><textarea rows="3" id="sugMsg" required></textarea></div>
+          <button type="submit" class="btn-glow" style="background:#333; color:var(--accent);">إرسال الاقتراح</button>
+        </form>
+      </div>
+    </div>
+  </details>
+
+  <!-- policies -->
+  <div class="policies-grid">
+    <details class="policy-details"><summary class="policy-summary"><i class="fas fa-store"></i> معلومات المتجر</summary><div class="policy-content"><strong>ABO MALEK STORE</strong> متخصص في شحن UC و حزم الازدهار بأفضل الأسعار. نضمن التنفيذ خلال دقائق. <span style="color:#f5a623;">🎉 عروض العيد: خصومات خاصة على جميع باقات UC!</span></div></details>
+    <details class="policy-details"><summary class="policy-summary"><i class="fas fa-shield"></i> سياسة الخصوصية</summary><div class="policy-content">بيانات اللاعب تُستخدم فقط لإتمام الطلب ولا يتم مشاركتها مع أي طرف ثالث.</div></details>
+    <details class="policy-details"><summary class="policy-summary"><i class="fas fa-rotate-left"></i> سياسة الاسترجاع</summary><div class="policy-content">في حال فشل الشحن خلال 48 ساعة نرد المبلغ بالكامل. لا استرجاع بعد الشحن بنجاح أو ID خاطئ من العميل.</div></details>
+  </div>
+
+  <footer>
+    <div style="font-family: 'Orbitron'; color:var(--accent);">ABO MALEK STORE</div>
+    <div class="footer-links" style="margin:15px 0; display:flex; gap:20px; justify-content:center;"><a href="https://wa.me/201118799321" style="color:var(--text-muted);"><i class="fab fa-whatsapp"></i> واتساب</a></div>
+    <div class="footer-copy" style="font-size:0.75rem;">© 2026 ABO MALEK STORE - جميع الحقوق محفوظة - عيد مبارك 🎉</div>
+  </footer>
+</main>
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+  // ---------- DATA with NEW PRICES (EID OFFERS) ----------
+  const ucItems = [
+    { value: "60 UC", price: 50, img: "https://i.postimg.cc/zBbk300s/level1-cb11b2cd.png", offer: true },
+    { value: "325 UC", price: 230, img: "https://i.postimg.cc/RVzTV1KZ/level2-f2b27a84.png", offer: true, },
+    { value: "660 UC", price: 440, img: "https://i.postimg.cc/hGhL32WX/level3-6e2a3de7.png", offer: true, },
+    { value: "1800 UC", price: 1050, img: "https://i.postimg.cc/nzDvnMLM/level4-5662a174.png", offer: true, },
+    { value: "3850 UC", price: 2200, img: "https://i.postimg.cc/Wp0MKDKM/level5-5a6a7af6.png", offer: true, },
+    { value: "8100 UC", price: 4300, img: "https://i.postimg.cc/90NV1XGm/level6-03ebac0d.png", offer: true, }
+  ];
+
+  const bundleItems = [
+    { name: "ازدهار أولى", value: "حزمة الازدهار الاولى", price: 50, img: "https://i.postimg.cc/wTcn6jtD/First-Purchase-Pack-bacd265b.jpg", offer: false },
+    { name: "ازدهار ثانية", value: "حزمة الازدهار الثانية", price: 150, img: "https://i.postimg.cc/762QjH8Y/Upgradable-Pack-8b6dc3a7.jpg", offer: false },
+    { name: "ازدهار ثالثة", value: "حزمة الازدهار الثالثة", price: 250, img: "https://i.postimg.cc/gjytkg0m/Mythic-Pack-25332821.jpg", offer: false },
+    { name: "برايم 3 أشهر", value: "Prime 3 Month", price: 150, img: "https://i.postimg.cc/gcKKjXDY/3-ar-c9a3ebd6.jpg", offer: false },
+    { name: "برايم 6 أشهر", value: "Prime 6 Month", price: 300, img: "https://i.postimg.cc/qMMx3Jb5/6-ar-02ac5793.jpg", offer: false },
+    { name: "برايم 12 شهر", value: "Prime 12 Month", price: 600, img: "https://i.postimg.cc/xTxyGwBn/12-ar-471c9625.jpg", offer: false }
+  ];
+
+  let activeTab = "uc";
+  let selectedProduct = null;
+  let appliedDiscount = null;
+
+  function renderProducts() {
+    const ucContainer = document.getElementById("ucProducts");
+    const bundleContainer = document.getElementById("bundleProducts");
+    ucContainer.innerHTML = "";
+    bundleContainer.innerHTML = "";
+    
+    ucItems.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "product-item";
+      card.setAttribute("data-type", "uc");
+      card.setAttribute("data-price", item.price);
+      card.setAttribute("data-name", item.value);
+      card.setAttribute("data-img", item.img);
+      
+      let priceHtml = `<div class="product-price">${item.price} ج.م</div>`;
+      if (item.offer && item.oldPrice) {
+        priceHtml = `<div class="product-price">${item.price} ج.م <span class="old-price">${item.oldPrice} ج.م</span></div>`;
+      }
+      
+      card.innerHTML = `
+        <div class="check-mark"><i class="fas fa-check"></i></div>
+        ${item.offer ? '<div class="eid-offer-badge"><i class="fas fa-moon"></i> عرض العيد</div>' : ''}
+        <img class="product-img" src="${item.img}" alt="${item.value}">
+        <div class="product-title">${item.value}</div>
+        ${priceHtml}
+      `;
+      card.addEventListener("click", () => selectProductHandler(card, "uc", item.value, item.price, item.img));
+      ucContainer.appendChild(card);
+    });
+    
+    bundleItems.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "product-item";
+      card.setAttribute("data-type", "bundle");
+      card.setAttribute("data-price", item.price);
+      card.setAttribute("data-name", item.name);
+      card.innerHTML = `
+        <div class="check-mark"><i class="fas fa-check"></i></div>
+        <img class="product-img" src="${item.img}" alt="${item.name}">
+        <div class="product-title">${item.name}</div>
+        <div class="product-price">${item.price} ج.م</div>
+      `;
+      card.addEventListener("click", () => selectProductHandler(card, "bundle", item.value, item.price, item.img));
+      bundleContainer.appendChild(card);
+    });
+  }
+
+  function selectProductHandler(card, type, displayName, price, img) {
+    document.querySelectorAll(`#${activeTab === "uc" ? "ucProducts" : "bundleProducts"} .product-item`).forEach(c => c.classList.remove("selected"));
+    card.classList.add("selected");
+    selectedProduct = { type, displayName, price, rawValue: displayName };
+    appliedDiscount = null;
+    document.getElementById("couponInput").value = "";
+    document.getElementById("couponMsg").innerHTML = "";
+    updateTotalUI();
+    const infoDiv = document.getElementById("selectedInfoBox");
+    const span = document.getElementById("selectedItemText");
+    span.innerText = `${displayName} — ${price} ج.م`;
+    infoDiv.classList.add("show");
+  }
+
+  function updateTotalUI() {
+    let base = selectedProduct ? selectedProduct.price : 0;
+    let final = base;
+    if (appliedDiscount && appliedDiscount.newTotal !== undefined) final = appliedDiscount.newTotal;
+    document.getElementById("totalAmountSpan").innerText = final + " ج.م";
+  }
+
+  async function applyCouponLogic() {
+    const code = document.getElementById("couponInput").value.trim();
+    const msgDiv = document.getElementById("couponMsg");
+    if (!selectedProduct) { msgDiv.innerHTML = '<span style="color:#e63946;">اختر منتجاً أولاً</span>'; return; }
+    if (!code) { msgDiv.innerHTML = '<span style="color:#e63946;">أدخل الكود</span>'; return; }
+    const original = selectedProduct.price;
+    const btn = document.getElementById("applyCouponBtn");
+    btn.disabled = true; btn.innerHTML = "...";
+    try {
+      const fakeRes = await fetch('/api/verify-coupon', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code, originalAmount: original }) }).catch(() => null);
+      let result;
+      if (fakeRes && fakeRes.ok) result = await fakeRes.json();
+      else {
+        if (code === "EID10") result = { success: true, discountPercent: 10, discount: original * 0.1, newTotal: original * 0.9, couponCode: "EID10" };
+        else if (code === "WELCOME20") result = { success: true, discountPercent: 20, discount: original * 0.2, newTotal: original * 0.8, couponCode: "WELCOME20" };
+        else result = { success: false, message: "كود غير صالح" };
+      }
+      if (result.success) {
+        appliedDiscount = { newTotal: result.newTotal, discountPercent: result.discountPercent, code: result.couponCode };
+        msgDiv.innerHTML = `<span style="color:#2ec4b6;">✔ خصم ${result.discountPercent}% تم بنجاح</span>`;
+        updateTotalUI();
+      } else {
+        appliedDiscount = null;
+        msgDiv.innerHTML = `<span style="color:#e63946;">${result.message || 'كود غير صالح'}</span>`;
+        updateTotalUI();
+      }
+    } catch(e) { msgDiv.innerHTML = '<span style="color:#e63946;">خطأ في التحقق</span>'; } finally { btn.disabled = false; btn.innerHTML = "تطبيق"; }
+  }
+
+  // order submit (mock api)
+  document.getElementById("mainOrderForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!selectedProduct) { showToast("خطأ", "اختر منتج أولاً", "error"); return; }
+    const name = document.getElementById("ign").value.trim();
+    const playerId = document.getElementById("playerId").value.trim();
+    const email = document.getElementById("emailUser").value.trim();
+    if (!name || !playerId || !email) { showToast("تنبيه", "جميع الحقول مطلوبة", "error"); return; }
+    const totalAmount = appliedDiscount ? appliedDiscount.newTotal : selectedProduct.price;
+    const orderPayload = { name, playerId, email, product: selectedProduct.displayName, totalAmount, couponCode: appliedDiscount ? appliedDiscount.code : null };
+    const submitBtn = document.getElementById("orderSubmitBtn");
+    submitBtn.disabled = true; submitBtn.innerHTML = "<span style='display:inline-block;width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin 0.6s linear infinite;'></span> جاري...";
+    try {
+      await new Promise(resolve => setTimeout(resolve, 800));
+      showToast("تم إرسال الطلب", "سيتم التواصل معك للدفع قريباً", "success");
+      document.getElementById("mainOrderForm").reset();
+      selectedProduct = null;
+      appliedDiscount = null;
+      document.querySelectorAll(".product-item").forEach(c => c.classList.remove("selected"));
+      document.getElementById("selectedInfoBox").classList.remove("show");
+      document.getElementById("couponMsg").innerHTML = "";
+      document.getElementById("totalAmountSpan").innerText = "0 ج.م";
+    } catch (err) { showToast("فشل", "حدث خطأ، حاول مرة أخرى", "error"); } finally { submitBtn.disabled = false; submitBtn.innerHTML = "<i class='fas fa-arrow-left'></i> إتمام الطلب"; }
+  });
+
+  // Contact forms
+  document.getElementById("inquiryForm").addEventListener("submit", async (e) => { e.preventDefault(); showToast("شكراً", "تم استلام استفسارك، سيتم الرد قريباً", "success"); e.target.reset(); });
+  document.getElementById("suggestionForm").addEventListener("submit", async (e) => { e.preventDefault(); showToast("اقتراح", "نقدر رأيك! تم الاستلام", "success"); e.target.reset(); });
+
+  function showToast(title, msg, type="success") { const container = document.getElementById("toastContainer"); const toast = document.createElement("div"); toast.className = "toast"; toast.innerHTML = `<strong>${title}</strong><div style="font-size:12px;">${msg}</div>`; container.appendChild(toast); setTimeout(()=> toast.remove(), 4000); }
+
+  // Tabs UI
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeTab = btn.getAttribute("data-tab");
+      document.getElementById("ucProducts").style.display = activeTab === "uc" ? "grid" : "none";
+      document.getElementById("bundleProducts").style.display = activeTab === "bundles" ? "grid" : "none";
+      selectedProduct = null;
+      appliedDiscount = null;
+      document.querySelectorAll(".product-item").forEach(c => c.classList.remove("selected"));
+      document.getElementById("selectedInfoBox").classList.remove("show");
+      document.getElementById("couponMsg").innerHTML = "";
+      document.getElementById("couponInput").value = "";
+      updateTotalUI();
+    });
+  });
+
+  // contact inner tabs
+  document.querySelectorAll(".contact-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".contact-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      const target = tab.getAttribute("data-contact");
+      document.getElementById("inquiryPane").classList.toggle("active", target === "inquiry");
+      document.getElementById("suggestionPane").classList.toggle("active", target === "suggestion");
+    });
+  });
+
+  document.getElementById("applyCouponBtn").addEventListener("click", applyCouponLogic);
+  renderProducts();
+  updateTotalUI();
+</script>
+</body>
+</html>
