@@ -202,7 +202,7 @@ app.post("/api/order", upload.single("screenshot"), async (req, res) => {
     const notifyTo = process.env.NOTIFICATION_EMAIL || process.env.SMTP_USER || process.env.EMAIL_USER;
     if (notifyTo) {
       transporter.sendMail({
-        from: `"ABO MALEK STORE" <${process.env.SMTP_USER || process.env.EMAIL_USER}>`,
+        from: `"Trip Store" <${process.env.SMTP_USER || process.env.EMAIL_USER}>`,
         to: notifyTo,
         subject: "طلب جديد",
         html: `<div dir="rtl">
@@ -545,113 +545,34 @@ app.post("/api/admin/send-message", requireAdmin, async (req, res) => {
     // محاولة إرسال البريد الإلكتروني
     try {
       const info = await transporter.sendMail({
-  from: `"ABO MALEK STORE فريق الدعم" <${smtpUser}>`,
-  to: email,
-  subject: subject,
-
-  // تضمين اللوجو داخل الإيميل
-  attachments: [
-    {
-      filename: "abo_malek_store.png",
-      path: path.join(__dirname, "../public/ABO_MALEK.jpeg"),
-      cid: "abomaleklogo"
-    }
-  ],
-
-  html: `
-    <div dir="rtl" style="
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #e0e0e0;
-      border-radius: 12px;
-      background: #ffffff;
-    ">
-
-      <div style="text-align: center; margin-bottom: 25px;">
-
-        <img
-          src="cid:abomaleklogo"
-          alt="ABO MALEK STORE"
-          style="
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #ff7a00;
-          "
-        />
-
-        <h2 style="
-          color: #ff7a00;
-          margin-top: 12px;
-          margin-bottom: 0;
-        ">
-          ABO MALEK STORE
-        </h2>
-
-      </div>
-
-      <div style="
-        background: #f8f9fa;
-        padding: 18px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-      ">
-
-        <h3 style="
-          color: #1a1a2e;
-          margin-top: 0;
-          margin-bottom: 15px;
-        ">
-          ${subject}
-        </h3>
-
-        <div style="
-          color: #333;
-          line-height: 1.8;
-          font-size: 15px;
-        ">
-          ${String(message)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/\n/g, "<br>")}
-        </div>
-
-      </div>
-
-      <hr style="
-        border: none;
-        border-top: 1px solid #e0e0e0;
-        margin: 20px 0;
-      ">
-
-      <p style="
-        color: #777;
-        font-size: 12px;
-        text-align: center;
-        line-height: 1.8;
-      ">
-        هذا البريد إلكتروني آلي، يرجى عدم الرد عليه.
-        <br>
-        مع تحيات فريق دعم ABO MALEK STORE
-      </p>
-
-    </div>
-  `,
-
-  text:
-`ABO MALEK STORE
-
-الموضوع: ${subject}
-
-${message}
-
-هذا البريد إلكتروني آلي، يرجى عدم الرد عليه.
-مع تحيات فريق دعم ABO MALEK STORE`
-});
+        from: `"ABO MALEK STORE فريق الدعم" <${smtpUser}>`,
+        to: email,
+        subject: subject,
+        html: `
+          <div dir="rtl" style="font-family: 'Tajawal', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
+            <div style="text-align: center; margin-bottom: 20px;">
+              <img src="https://i.postimg.cc/X799S1LZ/ABO-MALEK.jpg" alt="ABO MALEK STORE" style="width: 80px; height: 80px; border-radius: 50%;">
+              <h2 style="color: #ff7a00; margin-top: 10px;">ABO MALEK STORE</h2>
+            </div>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+              <h3 style="color: #1a1a2e; margin-top: 0;">${subject}</h3>
+              <div style="color: #333; line-height: 1.6;">
+                ${String(message)
+                  .replace(/\n/g, "<br>")
+                  .replace(/&/g, '&amp;')
+                  .replace(/</g, '&lt;')
+                  .replace(/>/g, '&gt;')}
+              </div>
+            </div>
+            <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;">
+            <p style="color: #666; font-size: 12px; text-align: center;">
+              هذا البريد إلكتروني آلي، يرجى عدم الرد عليه.<br>
+              مع تحيات فريق دعم ABO MALEK STORE
+            </p>
+          </div>
+        `,
+        text: `ABO MALEK STORE\n\nالموضوع: ${subject}\n\n${message}\n\nهذا البريد إلكتروني آلي، يرجى عدم الرد عليه.`
+      });
 
       console.log("✅ تم إرسال البريد:", info.messageId);
       
