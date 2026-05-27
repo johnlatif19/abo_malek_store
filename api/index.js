@@ -553,7 +553,7 @@ app.post("/api/admin/send-message", requireAdmin, async (req, res) => {
   attachments: [
     {
       filename: "abo_malek_store.png",
-      path: path.join(__dirname, "../public/abo_malek_store.png"),
+      path: path.join(__dirname, "../public/ABO_MALEK.jpeg"),
       cid: "abomaleklogo"
     }
   ],
