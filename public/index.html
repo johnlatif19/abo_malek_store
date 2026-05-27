@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>ABO MALEK STORE - متجر شحن شدات ببجي | عروض العيد</title>
-  <!-- favicon & logo -->
-  <link rel="icon" type="image/png" href="https://i.postimg.cc/X799S1LZ/ABO-MALEK.jpg">
-  <!-- fonts and icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <title>ABO MALEK STORE - متجر شحن شدات ببجي</title>
+  <link rel="icon" href="https://i.postimg.cc/X799S1LZ/ABO-MALEK.jpg" type="image/png">
+  <meta name="description" content="متجر ABO MALEK لشحن شدات ببجي بأسعار منافسة. شحن مباشر، دعم سريع." />
+  <meta name="author" content="ABO MALEK STORE" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -16,872 +17,461 @@
       box-sizing: border-box;
     }
 
+    /* CSS Variables for Light/Dark Modes */
     :root {
-      --accent: #f5a623;
-      --accent-light: #ffcd7e;
-      --accent-dark: #c47d0e;
-      --bg-dark: #05070c;
-      --bg-card: #0e111a;
-      --bg-elevated: #131723;
-      --border-dim: rgba(245, 166, 35, 0.2);
+      --bg-gradient-start: #faf9f6;
+      --bg-gradient-end: #f2efe9;
+      --text-primary: #1e1b16;
+      --text-secondary: #5d5a52;
+      --card-bg: #ffffff;
+      --card-border: #efe3d3;
+      --header-bg: rgba(255, 253, 245, 0.96);
+      --border-light: #e7dfd1;
+      --badge-bg: #ede7db;
+      --stat-bg: #ffffffcc;
+      --tab-bg: #fffaf2;
+      --tab-inactive: #6b655b;
+      --input-bg: #fefaf5;
+      --input-border: #e6ddd0;
+      --gold: #b97f2e;
+      --gold-light: #e0a13a;
+      --gold-dark: #c1852f;
+      --btn-dark: #2d2a24;
+      --selected-info-bg: #f1efe7;
+      --toast-bg: white;
+    }
+
+    body.dark {
+      --bg-gradient-start: #121212;
+      --bg-gradient-end: #1e1e1e;
       --text-primary: #f0ede8;
-      --text-muted: #9a8e7a;
-      --success: #2ec4b6;
-      --error: #e63946;
-      --eid-gold: #ffd966;
-      --shadow-glow: 0 8px 20px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,166,35,0.1);
+      --text-secondary: #b0aea5;
+      --card-bg: #1f1f1f;
+      --card-border: #33302b;
+      --header-bg: rgba(18, 18, 18, 0.96);
+      --border-light: #2c2a27;
+      --badge-bg: #2a2722;
+      --stat-bg: #2a2722cc;
+      --tab-bg: #25221e;
+      --tab-inactive: #a19e96;
+      --input-bg: #2a2a2a;
+      --input-border: #3e3b36;
+      --gold: #e0a13a;
+      --btn-dark: #e0a13a;
+      --selected-info-bg: #2a2722;
+      --toast-bg: #2a2a2a;
     }
 
     body {
-      font-family: 'Tajawal', sans-serif;
-      background: var(--bg-dark);
+      font-family: 'Cairo', 'Inter', sans-serif;
+      background: linear-gradient(145deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
       color: var(--text-primary);
-      line-height: 1.5;
       overflow-x: hidden;
+      line-height: 1.5;
+      transition: background 0.3s ease, color 0.2s ease;
     }
 
-    /* noise & subtle gradient */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: radial-gradient(circle at 20% 30%, rgba(245,166,35,0.02), transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-track { background: #e8e2d4; }
+    body.dark ::-webkit-scrollbar-track { background: #2a2a2a; }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 20px; }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 2;
-    }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
 
-    /* modern sticky header */
-    .glass-header {
+    /* Header */
+    header {
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(5,7,12,0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-dim);
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
     }
-
-    .header-flex {
+    .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 24px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .logo-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-
-    .logo-img {
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      border: 2px solid var(--accent);
-      object-fit: cover;
-      background: #111;
-      transition: transform 0.2s;
-    }
-
-    .logo-img:hover {
-      transform: scale(1.02);
-    }
-
-    .brand-name {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: 1px;
-      background: linear-gradient(135deg, #f5b042, #ffdd99);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 8px rgba(245,166,35,0.3);
-    }
-
-    /* hero */
-    .hero-modern {
-      padding: 60px 0 40px;
-      text-align: center;
-    }
-
-    .badge-accent {
-      display: inline-flex;
-      background: rgba(245,166,35,0.12);
-      border: 1px solid var(--border-dim);
-      border-radius: 60px;
-      padding: 6px 18px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: 24px;
-      gap: 8px;
-      backdrop-filter: blur(4px);
-    }
-
-    .hero-modern h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(2rem, 7vw, 3.8rem);
-      font-weight: 900;
-      margin-bottom: 16px;
-    }
-
-    .gradient-text {
-      background: linear-gradient(120deg, #f5a623, #ffcf7a);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      color: var(--text-muted);
-      max-width: 550px;
-      margin: 0 auto 36px;
-      font-size: 1.05rem;
-    }
-
-    .stats-row {
-      display: flex;
-      justify-content: center;
-      gap: 48px;
+      padding: 14px 0;
       flex-wrap: wrap;
-    }
-
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--accent);
-    }
-
-    /* layout grid */
-    .two-columns {
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 32px;
-      margin: 40px 0 60px;
-    }
-
-    @media (max-width: 820px) {
-      .two-columns {
-        grid-template-columns: 1fr;
-      }
-      .form-sticky {
-        position: relative;
-        top: 0;
-      }
-    }
-
-    /* products panel */
-    .tab-header {
-      display: flex;
       gap: 12px;
-      background: var(--bg-elevated);
-      padding: 6px;
-      border-radius: 60px;
-      width: fit-content;
-      margin-bottom: 28px;
-      border: 1px solid var(--border-dim);
     }
-
-    .tab-btn {
-      padding: 10px 26px;
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo img {
+      width: 48px; height: 48px; border-radius: 14px; object-fit: cover;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.05); border: 1px solid var(--card-border);
+    }
+    .logo-text {
+      font-size: 1.45rem; font-weight: 800; letter-spacing: -0.3px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .header-actions { display: flex; gap: 12px; align-items: center; }
+    .dark-mode-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 40px;
-      background: transparent;
-      border: none;
-      font-family: 'Tajawal', sans-serif;
-      font-weight: 700;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 0.9rem;
-    }
-
-    .tab-btn.active {
-      background: var(--accent);
-      color: #0a0a0a;
-      box-shadow: 0 2px 8px rgba(245,166,35,0.3);
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 16px;
-    }
-
-    .product-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border-dim);
-      border-radius: 20px;
-      padding: 16px 8px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* عروض العيد badge */
-    .eid-offer-badge {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background: linear-gradient(135deg, #e68a2e, #f5a623);
-      color: #000;
-      font-size: 0.65rem;
-      font-weight: 800;
-      padding: 4px 8px;
-      border-radius: 30px;
-      z-index: 2;
-      font-family: 'Orbitron', monospace;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      letter-spacing: 0.5px;
-    }
-
-    .product-item:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
-      background: #121724;
-    }
-
-    .product-item.selected {
-      border: 2px solid var(--accent);
-      background: rgba(245,166,35,0.08);
-      box-shadow: 0 0 0 1px var(--accent);
-    }
-
-    .check-mark {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--accent);
-      width: 24px;
-      height: 24px;
-      border-radius: 30px;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: black;
-    }
-
-    .product-item.selected .check-mark {
-      display: flex;
-    }
-
-    .product-img {
-      width: 70px;
-      height: 70px;
-      object-fit: contain;
-      margin-bottom: 12px;
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
-    }
-
-    .product-title {
-      font-size: 0.85rem;
+      padding: 8px 16px;
       font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .product-price {
-      font-family: 'Orbitron', monospace;
-      color: var(--accent);
-      font-weight: 700;
-      margin-top: 8px;
-      font-size: 0.9rem;
-    }
-
-    .old-price {
-      text-decoration: line-through;
-      font-size: 0.7rem;
-      color: #aa8c60;
-      margin-right: 5px;
-    }
-
-    /* form card */
-    .form-sticky {
-      position: sticky;
-      top: 90px;
-    }
-
-    .order-card {
-      background: var(--bg-elevated);
-      border-radius: 28px;
-      border: 1px solid var(--border-dim);
-      padding: 28px 24px;
-      backdrop-filter: blur(4px);
-    }
-
-    .order-card h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.9rem;
-      letter-spacing: 1.5px;
-      color: var(--accent);
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .input-field {
-      margin-bottom: 20px;
-    }
-
-    .input-field label {
-      display: block;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-      letter-spacing: 0.5px;
-    }
-
-    .input-field input, .input-field textarea {
-      width: 100%;
-      background: rgba(0,0,0,0.4);
-      border: 1px solid var(--border-dim);
-      border-radius: 16px;
-      padding: 12px 16px;
-      color: var(--text-primary);
-      font-family: 'Tajawal', sans-serif;
+      cursor: pointer;
+      color: var(--gold);
       transition: 0.2s;
     }
-
-    .input-field input:focus, .input-field textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      background: rgba(245,166,35,0.05);
+    .clan-link-btn {
+      background: var(--btn-dark); color: white; padding: 8px 20px; border-radius: 40px;
+      font-weight: 600; font-size: 0.85rem; text-decoration: none; display: inline-flex;
+      align-items: center; gap: 8px; transition: 0.2s;
     }
+    .clan-link-btn:hover { background: var(--gold); color: #1e1b16; transform: translateY(-2px); }
 
-    .coupon-group {
-      display: flex;
-      gap: 12px;
+    /* Hero */
+    .hero { padding: 56px 0 40px; text-align: center; }
+    .hero-badge {
+      display: inline-flex; background: var(--badge-bg); padding: 6px 18px; border-radius: 60px;
+      font-size: 0.75rem; font-weight: 600; color: var(--gold); gap: 8px; margin-bottom: 24px;
     }
+    .hero h1 { font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 800; color: var(--text-primary); }
+    .hero h1 .gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { color: var(--text-secondary); font-size: 1.05rem; max-width: 560px; margin: 16px auto 32px; }
+    .hero-stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .stat {
+      background: var(--stat-bg); backdrop-filter: blur(4px); padding: 8px 18px;
+      border-radius: 48px; border: 1px solid var(--card-border);
+    }
+    .stat-num { font-weight: 800; font-size: 1.5rem; color: var(--gold); }
+    .stat-label { font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); }
+    .divider { height: 2px; background: linear-gradient(90deg, transparent, var(--gold-light), transparent); margin: 0 24px; opacity: 0.5; }
 
-    .coupon-group input {
-      flex: 1;
-    }
+    /* Layout */
+    .order-layout { display: grid; grid-template-columns: 1fr 380px; gap: 32px; padding: 48px 0 56px; }
+    @media (max-width: 900px) { .order-layout { grid-template-columns: 1fr; gap: 32px; } }
 
-    .coupon-btn {
-      background: rgba(245,166,35,0.1);
-      border: 1px solid var(--border-dim);
-      border-radius: 16px;
-      padding: 0 18px;
-      font-weight: 700;
-      color: var(--accent);
-      cursor: pointer;
-      transition: 0.2s;
-    }
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .section-header h2 { font-weight: 700; font-size: 1.1rem; color: var(--gold); }
+    .section-header::after { content: ''; flex: 1; height: 2px; background: linear-gradient(90deg, var(--gold-light), transparent); }
 
-    .coupon-btn:hover {
-      background: rgba(245,166,35,0.25);
-    }
+    .tab-switcher { display: flex; gap: 10px; background: var(--tab-bg); padding: 5px; border-radius: 60px; margin-bottom: 28px; border: 1px solid var(--card-border); }
+    .tab-btn { flex: 1; padding: 10px 5px; border: none; background: transparent; font-weight: 700; font-size: 0.85rem; border-radius: 50px; cursor: pointer; transition: 0.2s; color: var(--tab-inactive); }
+    .tab-btn.active { background: var(--gold); color: white; box-shadow: 0 6px 12px rgba(185,127,46,0.2); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
-    .total-row {
-      background: #0b0f18;
-      border-radius: 20px;
-      padding: 14px 20px;
-      display: flex;
-      justify-content: space-between;
-      margin: 20px 0;
-      border: 1px solid rgba(245,166,35,0.2);
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 16px; }
+    .product-card {
+      background: var(--card-bg); border-radius: 24px; padding: 20px 12px; text-align: center; cursor: pointer;
+      transition: all 0.25s ease; border: 1px solid var(--card-border); box-shadow: 0 4px 10px rgba(0,0,0,0.02); position: relative;
     }
+    .product-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 20px 25px -12px rgba(185,127,46,0.2); }
+    .product-card.selected { border: 2px solid var(--gold); background: var(--selected-info-bg); }
+    .selected-check { position: absolute; top: 12px; left: 12px; background: var(--gold); width: 22px; height: 22px; border-radius: 30px; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; display: none; }
+    .product-card.selected .selected-check { display: flex; }
+    .product-img { width: 70px; height: 70px; object-fit: contain; margin-bottom: 12px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05)); }
+    .product-name { font-weight: 600; font-size: 0.85rem; color: var(--text-primary); margin-bottom: 6px; }
+    .product-price { font-weight: 800; font-size: 1rem; color: var(--gold); }
 
-    .total-label {
-      font-weight: 500;
-    }
+    /* Form */
+    .form-panel { position: sticky; top: 90px; height: fit-content; }
+    .form-card { background: var(--card-bg); border-radius: 32px; padding: 28px 24px; border: 1px solid var(--card-border); box-shadow: 0 20px 35px -12px rgba(0,0,0,0.07); }
+    .form-card h3 { font-size: 1.2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .field { margin-bottom: 18px; }
+    .field label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; display: block; }
+    .field input, .field textarea { width: 100%; padding: 12px 16px; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 20px; font-family: 'Cairo', sans-serif; font-size: 0.9rem; color: var(--text-primary); transition: 0.2s; }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(185,127,46,0.1); }
+    .coupon-row { display: flex; gap: 10px; }
+    .coupon-apply-btn { background: var(--badge-bg); border: none; padding: 0 18px; border-radius: 30px; font-weight: 700; cursor: pointer; color: var(--gold); transition: 0.2s; }
+    .coupon-apply-btn:hover { background: var(--gold); color: white; }
+    .coupon-msg { font-size: 0.75rem; margin-top: 6px; color: var(--text-secondary); }
+    .total-display { background: var(--selected-info-bg); border-radius: 28px; padding: 16px 20px; display: flex; justify-content: space-between; margin: 22px 0 20px; }
+    .total-amount { font-weight: 800; font-size: 1.4rem; color: var(--gold); }
+    .submit-btn { width: 100%; padding: 15px; background: var(--btn-dark); border: none; border-radius: 40px; color: white; font-weight: 800; font-size: 1rem; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .submit-btn:hover { background: var(--gold); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(185,127,46,0.3); }
+    .selected-info { background: var(--selected-info-bg); border-radius: 28px; padding: 12px 18px; margin-bottom: 20px; display: none; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--gold); }
+    .selected-info.show { display: flex; }
 
-    .total-value {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--accent);
-    }
+    /* Contact */
+    .contact-details { background: var(--card-bg); border-radius: 32px; margin-bottom: 20px; border: 1px solid var(--card-border); overflow: hidden; }
+    .contact-details summary { padding: 20px 28px; font-weight: 700; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 12px; background: var(--selected-info-bg); color: var(--gold); }
+    .contact-details summary::-webkit-details-marker { display: none; }
+    .contact-details summary::before { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; transition: transform 0.2s; }
+    .contact-details[open] summary::before { transform: rotate(180deg); }
+    .contact-inner { padding: 20px 28px 32px; border-top: 1px solid var(--card-border); }
+    .contact-tabs { display: flex; gap: 12px; margin-bottom: 24px; }
+    .contact-tab-btn { flex: 1; padding: 12px; border-radius: 60px; background: var(--input-bg); border: 1px solid var(--card-border); font-weight: 600; cursor: pointer; transition: 0.2s; color: var(--text-secondary); }
+    .contact-tab-btn.active, .contact-tab-btn:hover { background: var(--gold); color: white; border-color: var(--gold); }
+    .contact-form-wrap { display: none; }
+    .contact-form-wrap.active { display: block; }
+    .contact-submit-btn { background: var(--gold); border: none; width: 100%; padding: 14px; border-radius: 40px; font-weight: 700; color: white; margin-top: 10px; cursor: pointer; transition: 0.2s; }
+    .contact-submit-btn:hover { opacity: 0.9; transform: translateY(-2px); }
 
-    .btn-glow {
-      width: 100%;
-      background: linear-gradient(105deg, #d49216, var(--accent), #f5bc5e);
-      border: none;
-      border-radius: 28px;
-      padding: 16px;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 800;
-      color: #0e0e0e;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.25s;
-    }
+    /* Policies */
+    .policies-section { padding: 20px 0 60px; }
+    .policy-block { background: var(--card-bg); border-radius: 28px; margin-bottom: 16px; border: 1px solid var(--card-border); overflow: hidden; }
+    .policy-summary { padding: 18px 24px; font-weight: 700; cursor: pointer; list-style: none; display: flex; gap: 12px; color: var(--text-primary); }
+    .policy-body { padding: 0 24px 20px; color: var(--text-secondary); font-size: 0.85rem; }
 
-    .btn-glow:hover {
-      transform: scale(0.98);
-      box-shadow: 0 8px 28px rgba(245,166,35,0.4);
-    }
+    footer { border-top: 1px solid var(--border-light); padding: 48px 24px 36px; text-align: center; }
+    .footer-logo { font-weight: 800; font-size: 1.3rem; margin-bottom: 16px; color: var(--gold); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 20px; }
+    .footer-links a { color: var(--text-secondary); text-decoration: none; display: inline-flex; gap: 8px; transition: 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
 
-    .selected-badge {
-      background: rgba(46,196,182,0.1);
-      padding: 12px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      display: none;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.85rem;
-      border-right: 3px solid var(--success);
-    }
-
-    .selected-badge.show {
-      display: flex;
-    }
-
-    /* contact area */
-    .contact-wrapper {
-      background: var(--bg-elevated);
-      border-radius: 28px;
-      border: 1px solid var(--border-dim);
-      margin: 30px 0 40px;
-      overflow: hidden;
-    }
-
-    .contact-summary {
-      padding: 20px 28px;
-      font-weight: 800;
-      font-family: 'Orbitron', sans-serif;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      cursor: pointer;
-      background: rgba(245,166,35,0.02);
-      list-style: none;
-      transition: 0.2s;
-    }
-
-    .contact-summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .contact-summary::before {
-      content: '\f054';
-      font-family: 'Font Awesome 6 Free';
-      font-weight: 900;
-      font-size: 0.9rem;
-      transition: transform 0.25s;
-    }
-
-    details[open] .contact-summary::before {
-      transform: rotate(90deg);
-    }
-
-    .contact-inner {
-      padding: 24px 28px;
-      border-top: 1px solid var(--border-dim);
-    }
-
-    .contact-tab-group {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .contact-tab {
-      flex: 1;
-      background: transparent;
-      border: 1px solid var(--border-dim);
-      border-radius: 40px;
-      padding: 10px;
-      font-family: 'Tajawal', sans-serif;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-    }
-
-    .contact-tab.active {
-      background: var(--accent);
-      color: #000;
-      border-color: var(--accent);
-    }
-
-    .contact-form-pane {
-      display: none;
-    }
-
-    .contact-form-pane.active {
-      display: block;
-    }
-
-    /* policies */
-    .policies-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin: 40px 0 50px;
-    }
-
-    .policy-details {
-      background: var(--bg-card);
-      border-radius: 20px;
-      border: 1px solid var(--border-dim);
-      overflow: hidden;
-    }
-
-    .policy-summary {
-      padding: 18px 22px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      color: var(--text-muted);
-    }
-
-    .policy-content {
-      padding: 0 24px 24px;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      line-height: 1.7;
-      border-top: 1px solid var(--border-dim);
-    }
-
-    footer {
-      text-align: center;
-      padding: 32px 20px;
-      border-top: 1px solid var(--border-dim);
-      margin-top: 20px;
-    }
-
-    .toast-container {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .toast {
-      background: #0f141f;
-      border-right: 4px solid var(--accent);
-      padding: 12px 18px;
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-      min-width: 240px;
-      font-size: 0.85rem;
-      box-shadow: 0 8px 20px black;
-      animation: slideUp 0.2s ease;
-    }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateX(20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    .disabled-btn {
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    @media (max-width: 520px) {
-      .container { padding: 0 16px; }
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 12px; }
+    .toast { background: var(--toast-bg); border-radius: 28px; padding: 12px 20px; display: flex; gap: 12px; box-shadow: 0 12px 24px rgba(0,0,0,0.1); border-right: 5px solid; color: var(--text-primary); }
+    .toast.success { border-right-color: var(--gold); }
+    .toast.error { border-right-color: #e2816b; }
+    .spinner { width: 18px; height: 18px; border: 2px solid rgba(0,0,0,0.2); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (max-width: 550px) { .container { padding: 0 16px; } .products-grid { grid-template-columns: repeat(2, 1fr); } }
   </style>
 </head>
 <body>
 
-<div class="glass-header">
-  <div class="header-flex">
-    <a href="#" class="logo-wrapper">
-      <img src="https://i.postimg.cc/X799S1LZ/ABO-MALEK.jpg" class="logo-img" alt="ABO MALEK STORE">
-      <span class="brand-name">ABO MALEK STORE</span>
-    </a>
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <img src="https://i.postimg.cc/X799S1LZ/ABO-MALEK.jpg" alt="ABO MALEK STORE">
+        <span class="logo-text">ABO MALEK STORE</span>
+      </a>
+      <div class="header-actions">
+        <button class="dark-mode-btn" id="darkModeToggle" aria-label="تبديل الوضع المظلم"><i class="fas fa-moon"></i> داكن</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero container">
+  <div class="hero-badge"><i class="fas fa-bolt"></i> شحن فوري | دعم 24/7</div>
+  <h1>متجر <span class="gold">ABO MALEK</span></h1>
+  <p>أفضل عروض شدات ببجي بأسرع وقت وأقل الأسعار</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">+850</div><div class="stat-label">عميل راضي</div></div>
+    <div class="stat"><div class="stat-num">دقائق</div><div class="stat-label">سرعة التوصيل</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">ضمان الاستلام</div></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<div class="container order-layout">
+  <div class="products-panel">
+    <div class="section-header"><h2>اختر المنتج</h2></div>
+    <div class="tab-switcher">
+      <button class="tab-btn active" onclick="switchTab('uc', this)"><i class="fas fa-coins"></i> شدات UC</button>
+      <button class="tab-btn" onclick="switchTab('bundles', this)"><i class="fas fa-gift"></i> حزم ازدهار</button>
+    </div>
+    <div class="tab-content active" id="tab-uc">
+      <div class="products-grid" id="ucOptions">
+        <div class="product-card" data-value="60" data-price="50" onclick="selectProduct(this, 'uc')"><span class="selected-check"><i class="fas fa-check"></i></span><img src="https://i.postimg.cc/zBbk300s/level1-cb11b2cd.png" class="product-img"><div class="product-name">60 UC</div><div class="product-price">50 ج.م</div></div>
+        <div class="product-card" data-value="325" data-price="235" onclick="selectProduct(this, 'uc')"><span class="selected-check"><i class="fas fa-check"></i></span><img src="https://i.postimg.cc/RVzTV1KZ/level2-f2b27a84.png" class="product-img"><div class="product-name">325 UC</div><div class="product-price">235 ج.م</div></div>
+        <div class="product-card" data-value="660" data-price="460" onclick="selectProduct(this, 'uc')"><span class="selected-check"><i class="fas fa-check"></i></span><img src="https://i.postimg.cc/hGhL32WX/level3-6e2a3de7.png" class="product-img"><div class="product-name">660 UC</div><div class="product-price">460 ج.م</div></div>
+        <div class="product-card" data-value="1800" data-price="1200" onclick="selectProduct(this, 'uc')"><span class="selected-check"><i class="fas fa-check"></i></span><img src="https://i.postimg.cc/nzDvnMLM/level4-5662a174.png" class="product-img"><div class="product-name">1800 UC</div><div class="product-price">1200 ج.م</div></div>
+        <div class="product-card" data-value="3850" data-price="2400" onclick="selectProduct(this, 'uc')"><span class="selected-check"><i class="fas fa-check"></i></span><img src="https://i.postimg.cc/Wp0MKDKM/level5-5a6a7af6.png" class="product-img"><div class="product-name">3850 UC</div><div class="product-price">2400 ج.م</div></div>
+        <div class="product-card" data-value="8100" data-price="4600" onclick="selectProduct(this, 'uc')"><span class="selected-check"><i class="fas fa-check"></i></span><img src="https://i.postimg.cc/90NV1XGm/level6-03ebac0d.png" class="product-img"><div class="product-name">8100 UC</div><div class="product-price">4600 ج.م</div></div>
+      </div>
+    </div>
+    <div class="tab-content" id="tab-bundles">
+      <div class="products-grid" id="bundleOptions">
+        <div class="product-card" data-value="حزمة الازدهار الاولى" data-price="50" onclick="selectProduct(this, 'bundle')"><span class="selected-check"><i class="fas fa-check"></i></span><img src="https://i.postimg.cc/wTcn6jtD/First-Purchase-Pack-bacd265b.jpg" class="product-img"><div class="product-name">ازدهار أولى</div><div class="product-price">50 ج.م</div></div>
+        <div class="product-card" data-value="حزمة الازدهار الثانية" data-price="150" onclick="selectProduct(this, 'bundle')"><span class="selected-check"><i class="fas fa-check"></i></span><img src="https://i.postimg.cc/762QjH8Y/Upgradable-Pack-8b6dc3a7.jpg" class="product-img"><div class="product-name">ازدهار ثانية</div><div class="product-price">150 ج.م</div></div>
+        <div class="product-card" data-value="حزمة الازدهار الثالثة" data-price="250" onclick="selectProduct(this, 'bundle')"><span class="selected-check"><i class="fas fa-check"></i></span><img src="https://i.postimg.cc/gjytkg0m/Mythic-Pack-25332821.jpg" class="product-img"><div class="product-name">ازدهار ثالثة</div><div class="product-price">250 ج.م</div></div>
+        <div class="product-card" data-value="Prime 3 Month" data-price="150" onclick="selectProduct(this, 'bundle')"><span class="selected-check"><i class="fas fa-check"></i></span><img src="https://i.postimg.cc/gcKKjXDY/3-ar-c9a3ebd6.jpg" class="product-img"><div class="product-name">برايم 3 أشهر</div><div class="product-price">150 ج.م</div></div>
+        <div class="product-card" data-value="Prime 6 Month" data-price="300" onclick="selectProduct(this, 'bundle')"><span class="selected-check"><i class="fas fa-check"></i></span><img src="https://i.postimg.cc/qMMx3Jb5/6-ar-02ac5793.jpg" class="product-img"><div class="product-name">برايم 6 أشهر</div><div class="product-price">300 ج.م</div></div>
+        <div class="product-card" data-value="Prime 12 Month" data-price="600" onclick="selectProduct(this, 'bundle')"><span class="selected-check"><i class="fas fa-check"></i></span><img src="https://i.postimg.cc/xTxyGwBn/12-ar-471c9625.jpg" class="product-img"><div class="product-name">برايم 12 شهر</div><div class="product-price">600 ج.م</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-panel">
+    <div class="form-card">
+      <h3><i class="fas fa-receipt"></i> تفاصيل الطلب</h3>
+      <div class="selected-info" id="selectedInfo"><i class="fas fa-check-circle"></i> <span id="selectedInfoText"></span></div>
+      <form id="orderForm">
+        <div class="field"><label>الاسم داخل اللعبة</label><input type="text" id="name" placeholder="اسمك في اللعبة" required></div>
+        <div class="field"><label>ID اللاعب</label><input type="text" id="playerId" placeholder="Player ID" required></div>
+        <div class="field"><label>البريد الإلكتروني</label><input type="email" id="email" placeholder="للتواصل" required></div>
+        <div class="field"><label>كود الخصم (اختياري)</label><div class="coupon-row"><input type="text" id="couponCode" placeholder="أدخل الكود"><button type="button" class="coupon-apply-btn" id="applyCouponBtn" onclick="applyCoupon()">تطبيق</button></div><div class="coupon-msg" id="couponMessage"></div></div>
+        <div class="total-display"><span class="total-label">الإجمالي</span><span class="total-amount" id="totalDisplay">0 ج.م</span></div>
+        <button type="submit" class="submit-btn" id="submitBtn">إرسال الطلب <i class="fas fa-arrow-left"></i></button>
+      </form>
+    </div>
   </div>
 </div>
 
-<main class="container">
-  <div class="hero-modern">
-    <div class="badge-accent">
-      <i class="fas fa-bolt"></i> شحن فوري وآمن
-    </div>
-    <h1>ABO MALEK <span class="gradient-text">STORE</span></h1>
-    <p class="hero-sub">أسرع متجر لشحن شدات ببجي وUC | دعم VIP وتنفيذ فوري | 🎉 عروض العيد</p>
-    <div class="stats-row">
-      <div class="stat-item"><div class="stat-number">+750</div><div>عميل وثق بنا</div></div>
-      <div class="stat-item"><div class="stat-number">دقائق</div><div>سرعة التوصيل</div></div>
-      <div class="stat-item"><div class="stat-number">100%</div><div>ضمان الاستلام</div></div>
-    </div>
-  </div>
+<div class="divider"></div>
 
-  <div class="two-columns">
-    <!-- products side -->
-    <div>
-      <div class="tab-header">
-        <button class="tab-btn active" data-tab="uc">شدات UC <i class="fas fa-coins"></i></button>
-        <button class="tab-btn" data-tab="bundles">حزم ازدهار <i class="fas fa-gift"></i></button>
-      </div>
-      <!-- UC grid -->
-      <div id="ucProducts" class="products-grid active-tab"></div>
-      <div id="bundleProducts" class="products-grid" style="display: none;"></div>
-    </div>
-
-    <!-- order form -->
-    <div class="form-sticky">
-      <div class="order-card">
-        <h3><i class="fas fa-cart-shopping"></i> تفاصيل الطلب</h3>
-        <div id="selectedInfoBox" class="selected-badge"><i class="fas fa-check-circle"></i> <span id="selectedItemText"></span></div>
-        <form id="mainOrderForm">
-          <div class="input-field"><label>الاسم داخل اللعبة</label><input type="text" id="ign" placeholder="اسم الشخصية" required></div>
-          <div class="input-field"><label>Player ID</label><input type="text" id="playerId" placeholder="معرف اللاعب" required></div>
-          <div class="input-field"><label>البريد الإلكتروني</label><input type="email" id="emailUser" placeholder="بريدك الإلكتروني" required></div>
-          <div class="input-field"><label>كود الخصم (اختياري)</label><div class="coupon-group"><input type="text" id="couponInput" placeholder="أدخل الكود"><button type="button" id="applyCouponBtn" class="coupon-btn">تطبيق</button></div><div id="couponMsg" class="coupon-msg" style="font-size:12px; margin-top:5px;"></div></div>
-          <div class="total-row"><span class="total-label">الإجمالي</span><span class="total-value" id="totalAmountSpan">0 ج.م</span></div>
-          <button type="submit" id="orderSubmitBtn" class="btn-glow"><i class="fas fa-arrow-left"></i> إتمام الطلب</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- contact -->
-  <details class="contact-wrapper">
-    <summary class="contact-summary"><i class="fas fa-headset"></i> مركز الدعم والمساعدة</summary>
+<div class="container">
+  <div class="section-header"><h2>تواصل معنا</h2></div>
+  <details class="contact-details">
+    <summary><i class="fas fa-headset"></i> مركز الدعم والمساعدة</summary>
     <div class="contact-inner">
-      <div class="contact-tab-group">
-        <button class="contact-tab active" data-contact="inquiry">استفسار</button>
-        <button class="contact-tab" data-contact="suggestion">اقتراح</button>
+      <div class="contact-tabs">
+        <button class="contact-tab-btn active" onclick="switchContactTab('inquiry', this)"><i class="fas fa-question-circle"></i> استفسار</button>
+        <button class="contact-tab-btn" onclick="switchContactTab('suggestion', this)"><i class="fas fa-lightbulb"></i> اقتراح</button>
       </div>
-      <div id="inquiryPane" class="contact-form-pane active">
-        <form id="inquiryForm">
-          <div class="input-field"><label>الاسم</label><input type="text" id="inqName" required></div>
-          <div class="input-field"><label>البريد الإلكتروني</label><input type="email" id="inqEmail" required></div>
-          <div class="input-field"><label>الرسالة</label><textarea rows="3" id="inqMsg" required></textarea></div>
-          <button type="submit" class="btn-glow" style="background:#333; color:var(--accent);">إرسال الاستفسار</button>
+      <div class="contact-form-wrap active" id="contact-inquiry">
+        <form id="contactForm">
+          <div class="field"><label>الاسم</label><input type="text" id="contactName" required></div>
+          <div class="field"><label>البريد الإلكتروني</label><input type="email" id="contactEmail" required></div>
+          <div class="field"><label>الرسالة</label><textarea id="contactMessage" rows="3" required></textarea></div>
+          <button type="submit" class="contact-submit-btn"><i class="fas fa-paper-plane"></i> إرسال</button>
         </form>
       </div>
-      <div id="suggestionPane" class="contact-form-pane">
-        <form id="suggestionForm">
-          <div class="input-field"><label>الاسم</label><input type="text" id="sugName" required></div>
-          <div class="input-field"><label>وسيلة التواصل</label><input type="text" id="sugContact" placeholder="هاتف أو بريد" required></div>
-          <div class="input-field"><label>الاقتراح</label><textarea rows="3" id="sugMsg" required></textarea></div>
-          <button type="submit" class="btn-glow" style="background:#333; color:var(--accent);">إرسال الاقتراح</button>
+      <div class="contact-form-wrap" id="contact-suggestion">
+        <form id="suggestionFormContent">
+          <div class="field"><label>الاسم</label><input type="text" id="suggestionName" required></div>
+          <div class="field"><label>رقم الهاتف أو البريد</label><input type="text" id="suggestionContact" required></div>
+          <div class="field"><label>الاقتراح</label><textarea id="suggestionMessage" rows="3" required></textarea></div>
+          <button type="submit" class="contact-submit-btn"><i class="fas fa-lightbulb"></i> إرسال</button>
         </form>
       </div>
     </div>
   </details>
+</div>
 
-  <!-- policies -->
-  <div class="policies-grid">
-    <details class="policy-details"><summary class="policy-summary"><i class="fas fa-store"></i> معلومات المتجر</summary><div class="policy-content"><strong>ABO MALEK STORE</strong> متخصص في شحن UC و حزم الازدهار بأفضل الأسعار. نضمن التنفيذ خلال دقائق. <span style="color:#f5a623;">🎉 عروض العيد: خصومات خاصة على جميع باقات UC!</span></div></details>
-    <details class="policy-details"><summary class="policy-summary"><i class="fas fa-shield"></i> سياسة الخصوصية</summary><div class="policy-content">بيانات اللاعب تُستخدم فقط لإتمام الطلب ولا يتم مشاركتها مع أي طرف ثالث.</div></details>
-    <details class="policy-details"><summary class="policy-summary"><i class="fas fa-rotate-left"></i> سياسة الاسترجاع</summary><div class="policy-content">في حال فشل الشحن خلال 48 ساعة نرد المبلغ بالكامل. لا استرجاع بعد الشحن بنجاح أو ID خاطئ من العميل.</div></details>
-  </div>
+<div class="container policies-section">
+  <div class="section-header"><h2>السياسات</h2></div>
+  <details class="policy-block"><summary class="policy-summary"><i class="fas fa-info-circle"></i> معلومات عن المتجر</summary><div class="policy-body"><p><strong>ABO MALEK STORE</strong> نوفر أفضل تجربة لشحن UC ببجي عبر فودافون كاش. نضمن تنفيذ الطلبات بشكل فوري وآمن.</p><h3>لماذا تختارنا؟</h3><ul><li>سرعة تنفيذ خلال دقائق</li><li>دفع آمن وسهل</li><li>دعم فوري عبر واتساب</li><li>ضمان استلام الشدات</li></ul></div></details>
+  <details class="policy-block"><summary class="policy-summary"><i class="fas fa-shield-alt"></i> سياسة الخصوصية</summary><div class="policy-body"><p>نحترم خصوصيتك ولا نشارك بياناتك مع أي طرف ثالث.</p><h3>البيانات التي نجمعها:</h3><ul><li>اسم اللاعب وID</li><li>البريد الإلكتروني للتواصل</li></ul></div></details>
+  <details class="policy-block"><summary class="policy-summary"><i class="fas fa-undo"></i> سياسة الاسترجاع</summary><div class="policy-body"><p>لا يمكن استرجاع المبلغ بعد الشحن إلا في حالة فشل التنفيذ خلال 48 ساعة أو خطأ فني من طرفنا.</p></div></details>
+</div>
 
-  <footer>
-    <div style="font-family: 'Orbitron'; color:var(--accent);">ABO MALEK STORE</div>
-    <div class="footer-links" style="margin:15px 0; display:flex; gap:20px; justify-content:center;"><a href="https://wa.me/201118799321" style="color:var(--text-muted);"><i class="fab fa-whatsapp"></i> واتساب</a></div>
-    <div class="footer-copy" style="font-size:0.75rem;">© 2026 ABO MALEK STORE - جميع الحقوق محفوظة - عيد مبارك 🎉</div>
-  </footer>
-</main>
+<footer>
+  <div class="footer-logo">ABO MALEK STORE</div>
+  <div class="footer-links"><a href="https://wa.me/201274445091"><i class="fab fa-whatsapp"></i> واتساب</a><a href="#"><i class="fab fa-telegram"></i> تليجرام</a><a href="#"><i class="fab fa-instagram"></i> انستغرام</a></div>
+  <div class="footer-copy">© 2026 ABO MALEK STORE — جميع الحقوق محفوظة</div>
+</footer>
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
-  // ---------- DATA with NEW PRICES (EID OFFERS) ----------
-  const ucItems = [
-    { value: "60 UC", price: 50, img: "https://i.postimg.cc/zBbk300s/level1-cb11b2cd.png", offer: true },
-    { value: "325 UC", price: 230, img: "https://i.postimg.cc/RVzTV1KZ/level2-f2b27a84.png", offer: true, },
-    { value: "660 UC", price: 440, img: "https://i.postimg.cc/hGhL32WX/level3-6e2a3de7.png", offer: true, },
-    { value: "1800 UC", price: 1050, img: "https://i.postimg.cc/nzDvnMLM/level4-5662a174.png", offer: true, },
-    { value: "3850 UC", price: 2200, img: "https://i.postimg.cc/Wp0MKDKM/level5-5a6a7af6.png", offer: true, },
-    { value: "8100 UC", price: 4300, img: "https://i.postimg.cc/90NV1XGm/level6-03ebac0d.png", offer: true, }
-  ];
-
-  const bundleItems = [
-    { name: "ازدهار أولى", value: "حزمة الازدهار الاولى", price: 50, img: "https://i.postimg.cc/wTcn6jtD/First-Purchase-Pack-bacd265b.jpg", offer: false },
-    { name: "ازدهار ثانية", value: "حزمة الازدهار الثانية", price: 150, img: "https://i.postimg.cc/762QjH8Y/Upgradable-Pack-8b6dc3a7.jpg", offer: false },
-    { name: "ازدهار ثالثة", value: "حزمة الازدهار الثالثة", price: 250, img: "https://i.postimg.cc/gjytkg0m/Mythic-Pack-25332821.jpg", offer: false },
-    { name: "برايم 3 أشهر", value: "Prime 3 Month", price: 150, img: "https://i.postimg.cc/gcKKjXDY/3-ar-c9a3ebd6.jpg", offer: false },
-    { name: "برايم 6 أشهر", value: "Prime 6 Month", price: 300, img: "https://i.postimg.cc/qMMx3Jb5/6-ar-02ac5793.jpg", offer: false },
-    { name: "برايم 12 شهر", value: "Prime 12 Month", price: 600, img: "https://i.postimg.cc/xTxyGwBn/12-ar-471c9625.jpg", offer: false }
-  ];
-
-  let activeTab = "uc";
-  let selectedProduct = null;
-  let appliedDiscount = null;
-
-  function renderProducts() {
-    const ucContainer = document.getElementById("ucProducts");
-    const bundleContainer = document.getElementById("bundleProducts");
-    ucContainer.innerHTML = "";
-    bundleContainer.innerHTML = "";
-    
-    ucItems.forEach(item => {
-      const card = document.createElement("div");
-      card.className = "product-item";
-      card.setAttribute("data-type", "uc");
-      card.setAttribute("data-price", item.price);
-      card.setAttribute("data-name", item.value);
-      card.setAttribute("data-img", item.img);
-      
-      let priceHtml = `<div class="product-price">${item.price} ج.م</div>`;
-      if (item.offer && item.oldPrice) {
-        priceHtml = `<div class="product-price">${item.price} ج.م <span class="old-price">${item.oldPrice} ج.م</span></div>`;
-      }
-      
-      card.innerHTML = `
-        <div class="check-mark"><i class="fas fa-check"></i></div>
-        ${item.offer ? '<div class="eid-offer-badge"><i class="fas fa-moon"></i> عرض العيد</div>' : ''}
-        <img class="product-img" src="${item.img}" alt="${item.value}">
-        <div class="product-title">${item.value}</div>
-        ${priceHtml}
-      `;
-      card.addEventListener("click", () => selectProductHandler(card, "uc", item.value, item.price, item.img));
-      ucContainer.appendChild(card);
-    });
-    
-    bundleItems.forEach(item => {
-      const card = document.createElement("div");
-      card.className = "product-item";
-      card.setAttribute("data-type", "bundle");
-      card.setAttribute("data-price", item.price);
-      card.setAttribute("data-name", item.name);
-      card.innerHTML = `
-        <div class="check-mark"><i class="fas fa-check"></i></div>
-        <img class="product-img" src="${item.img}" alt="${item.name}">
-        <div class="product-title">${item.name}</div>
-        <div class="product-price">${item.price} ج.م</div>
-      `;
-      card.addEventListener("click", () => selectProductHandler(card, "bundle", item.value, item.price, item.img));
-      bundleContainer.appendChild(card);
-    });
+  // Dark Mode Toggle
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> فاتح';
   }
+  darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    if (document.body.classList.contains('dark')) {
+      localStorage.setItem('theme', 'dark');
+      darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> فاتح';
+    } else {
+      localStorage.setItem('theme', 'light');
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i> داكن';
+    }
+  });
 
-  function selectProductHandler(card, type, displayName, price, img) {
-    document.querySelectorAll(`#${activeTab === "uc" ? "ucProducts" : "bundleProducts"} .product-item`).forEach(c => c.classList.remove("selected"));
-    card.classList.add("selected");
-    selectedProduct = { type, displayName, price, rawValue: displayName };
-    appliedDiscount = null;
-    document.getElementById("couponInput").value = "";
-    document.getElementById("couponMsg").innerHTML = "";
-    updateTotalUI();
-    const infoDiv = document.getElementById("selectedInfoBox");
-    const span = document.getElementById("selectedItemText");
-    span.innerText = `${displayName} — ${price} ج.م`;
-    infoDiv.classList.add("show");
+  let selectedUC = null, selectedBundle = null, appliedCoupon = null, currentOrderId = null;
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+tab).classList.add('active');
+    clearSelection();
   }
-
-  function updateTotalUI() {
-    let base = selectedProduct ? selectedProduct.price : 0;
-    let final = base;
-    if (appliedDiscount && appliedDiscount.newTotal !== undefined) final = appliedDiscount.newTotal;
-    document.getElementById("totalAmountSpan").innerText = final + " ج.م";
+  function switchContactTab(tab, btn) {
+    document.querySelectorAll('.contact-tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.contact-form-wrap').forEach(f=>f.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('contact-'+tab).classList.add('active');
   }
-
-  async function applyCouponLogic() {
-    const code = document.getElementById("couponInput").value.trim();
-    const msgDiv = document.getElementById("couponMsg");
-    if (!selectedProduct) { msgDiv.innerHTML = '<span style="color:#e63946;">اختر منتجاً أولاً</span>'; return; }
-    if (!code) { msgDiv.innerHTML = '<span style="color:#e63946;">أدخل الكود</span>'; return; }
-    const original = selectedProduct.price;
-    const btn = document.getElementById("applyCouponBtn");
-    btn.disabled = true; btn.innerHTML = "...";
+  function selectProduct(card, type) {
+    if(type === 'uc') {
+      document.querySelectorAll('#ucOptions .product-card').forEach(c=>c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedUC = card; selectedBundle = null;
+    } else {
+      document.querySelectorAll('#bundleOptions .product-card').forEach(c=>c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedBundle = card; selectedUC = null;
+    }
+    clearCoupon(); updateTotal(); updateSelectedInfo();
+  }
+  function clearSelection() { selectedUC=null; selectedBundle=null; document.querySelectorAll('.product-card').forEach(c=>c.classList.remove('selected')); clearCoupon(); updateTotal(); updateSelectedInfo(); }
+  function updateSelectedInfo() { let info=document.getElementById('selectedInfo'), txt=document.getElementById('selectedInfoText'), sel=selectedUC||selectedBundle; if(sel){ txt.textContent=sel.querySelector('.product-name').textContent+' — '+sel.querySelector('.product-price').textContent; info.classList.add('show');} else { info.classList.remove('show');} }
+  function getBaseTotal() { let sel=selectedUC||selectedBundle; return sel ? parseInt(sel.dataset.price) : 0; }
+  function updateTotal() { let total = appliedCoupon ? parseFloat(appliedCoupon.newTotal) : getBaseTotal(); document.getElementById('totalDisplay').textContent=(total||0)+' ج.م'; }
+  function clearCoupon() { appliedCoupon=null; document.getElementById('couponCode').value=''; document.getElementById('couponMessage').textContent=''; document.getElementById('couponMessage').className='coupon-msg'; }
+  async function applyCoupon() {
+    const code=document.getElementById('couponCode').value.trim(), msgEl=document.getElementById('couponMessage');
+    if(!code) { showToast('خطأ','أدخل كود الخصم','error'); return; }
+    const originalAmount=getBaseTotal();
+    if(!originalAmount) { showToast('خطأ','اختر منتجاً أولاً','error'); return; }
+    const btn=document.getElementById('applyCouponBtn'); btn.disabled=true; btn.innerHTML='<span class="spinner"></span>';
     try {
-      const fakeRes = await fetch('/api/verify-coupon', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code, originalAmount: original }) }).catch(() => null);
-      let result;
-      if (fakeRes && fakeRes.ok) result = await fakeRes.json();
-      else {
-        if (code === "EID10") result = { success: true, discountPercent: 10, discount: original * 0.1, newTotal: original * 0.9, couponCode: "EID10" };
-        else if (code === "WELCOME20") result = { success: true, discountPercent: 20, discount: original * 0.2, newTotal: original * 0.8, couponCode: "WELCOME20" };
-        else result = { success: false, message: "كود غير صالح" };
-      }
-      if (result.success) {
-        appliedDiscount = { newTotal: result.newTotal, discountPercent: result.discountPercent, code: result.couponCode };
-        msgDiv.innerHTML = `<span style="color:#2ec4b6;">✔ خصم ${result.discountPercent}% تم بنجاح</span>`;
-        updateTotalUI();
-      } else {
-        appliedDiscount = null;
-        msgDiv.innerHTML = `<span style="color:#e63946;">${result.message || 'كود غير صالح'}</span>`;
-        updateTotalUI();
-      }
-    } catch(e) { msgDiv.innerHTML = '<span style="color:#e63946;">خطأ في التحقق</span>'; } finally { btn.disabled = false; btn.innerHTML = "تطبيق"; }
+      const res=await fetch('/api/verify-coupon', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({code, originalAmount})});
+      const result=await res.json();
+      if(result.success) { appliedCoupon=result; msgEl.textContent=`✔ خصم ${result.discountPercent}% — وفرت ${result.discount} ج.م`; msgEl.className='coupon-msg success'; updateTotal(); }
+      else { appliedCoupon=null; msgEl.textContent='✘ '+(result.message||'كود غير صالح'); msgEl.className='coupon-msg error'; updateTotal(); }
+    } catch(e) { msgEl.textContent='✘ خطأ، حاول مرة أخرى'; msgEl.className='coupon-msg error'; } finally { btn.disabled=false; btn.textContent='تطبيق'; }
   }
-
-  // order submit (mock api)
-  document.getElementById("mainOrderForm").addEventListener("submit", async (e) => {
+  document.getElementById('orderForm').addEventListener('submit', async(e)=>{
     e.preventDefault();
-    if (!selectedProduct) { showToast("خطأ", "اختر منتج أولاً", "error"); return; }
-    const name = document.getElementById("ign").value.trim();
-    const playerId = document.getElementById("playerId").value.trim();
-    const email = document.getElementById("emailUser").value.trim();
-    if (!name || !playerId || !email) { showToast("تنبيه", "جميع الحقول مطلوبة", "error"); return; }
-    const totalAmount = appliedDiscount ? appliedDiscount.newTotal : selectedProduct.price;
-    const orderPayload = { name, playerId, email, product: selectedProduct.displayName, totalAmount, couponCode: appliedDiscount ? appliedDiscount.code : null };
-    const submitBtn = document.getElementById("orderSubmitBtn");
-    submitBtn.disabled = true; submitBtn.innerHTML = "<span style='display:inline-block;width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin 0.6s linear infinite;'></span> جاري...";
+    if(!selectedUC && !selectedBundle) { showToast('خطأ','اختر منتجاً أولاً','error'); return; }
+    const name=document.getElementById('name').value.trim(), playerId=document.getElementById('playerId').value.trim(), email=document.getElementById('email').value.trim();
+    const totalAmount=String(appliedCoupon ? parseFloat(appliedCoupon.newTotal) : getBaseTotal());
+    const orderData={name,playerId,email, ucAmount:selectedUC?selectedUC.dataset.value:'', bundle:selectedBundle?selectedBundle.dataset.value:'', totalAmount, couponCode:appliedCoupon?appliedCoupon.couponCode:null, discountAmount:appliedCoupon?appliedCoupon.discount:null};
+    const btn=document.getElementById('submitBtn'); btn.disabled=true; btn.innerHTML='<span class="spinner"></span> جاري الإرسال...';
     try {
-      await new Promise(resolve => setTimeout(resolve, 800));
-      showToast("تم إرسال الطلب", "سيتم التواصل معك للدفع قريباً", "success");
-      document.getElementById("mainOrderForm").reset();
-      selectedProduct = null;
-      appliedDiscount = null;
-      document.querySelectorAll(".product-item").forEach(c => c.classList.remove("selected"));
-      document.getElementById("selectedInfoBox").classList.remove("show");
-      document.getElementById("couponMsg").innerHTML = "";
-      document.getElementById("totalAmountSpan").innerText = "0 ج.م";
-    } catch (err) { showToast("فشل", "حدث خطأ، حاول مرة أخرى", "error"); } finally { submitBtn.disabled = false; submitBtn.innerHTML = "<i class='fas fa-arrow-left'></i> إتمام الطلب"; }
+      const res=await fetch('/api/order', {method:'POST', credentials:'include', headers:{'Content-Type':'application/json'}, body:JSON.stringify(orderData)});
+      const result=await res.json();
+      if(!res.ok) throw new Error(result.message||'خطأ في الخادم');
+      if(result.success){ currentOrderId=result.id; showToast('تم بنجاح','جاري التوجيه لصفحة الدفع...','success'); setTimeout(()=>{ window.location.href=`pay.html?orderId=${encodeURIComponent(currentOrderId)}`; },1500); }
+      else throw new Error(result.message||'خطأ غير معروف');
+    } catch(err){ showToast('خطأ',err.message||'فشل إرسال الطلب','error'); } finally { btn.disabled=false; btn.innerHTML='إرسال الطلب &nbsp;<i class="fas fa-arrow-left"></i>'; }
   });
 
-  // Contact forms
-  document.getElementById("inquiryForm").addEventListener("submit", async (e) => { e.preventDefault(); showToast("شكراً", "تم استلام استفسارك، سيتم الرد قريباً", "success"); e.target.reset(); });
-  document.getElementById("suggestionForm").addEventListener("submit", async (e) => { e.preventDefault(); showToast("اقتراح", "نقدر رأيك! تم الاستلام", "success"); e.target.reset(); });
-
-  function showToast(title, msg, type="success") { const container = document.getElementById("toastContainer"); const toast = document.createElement("div"); toast.className = "toast"; toast.innerHTML = `<strong>${title}</strong><div style="font-size:12px;">${msg}</div>`; container.appendChild(toast); setTimeout(()=> toast.remove(), 4000); }
-
-  // Tabs UI
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeTab = btn.getAttribute("data-tab");
-      document.getElementById("ucProducts").style.display = activeTab === "uc" ? "grid" : "none";
-      document.getElementById("bundleProducts").style.display = activeTab === "bundles" ? "grid" : "none";
-      selectedProduct = null;
-      appliedDiscount = null;
-      document.querySelectorAll(".product-item").forEach(c => c.classList.remove("selected"));
-      document.getElementById("selectedInfoBox").classList.remove("show");
-      document.getElementById("couponMsg").innerHTML = "";
-      document.getElementById("couponInput").value = "";
-      updateTotalUI();
+  // FIXED CONTACT FORMS (now properly attached and working)
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async(e) => {
+      e.preventDefault();
+      const btn = contactForm.querySelector('button');
+      btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>';
+      try {
+        const res = await fetch('/api/inquiry', {
+          method: 'POST', credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: document.getElementById('contactName').value,
+            email: document.getElementById('contactEmail').value,
+            message: document.getElementById('contactMessage').value
+          })
+        });
+        const result = await res.json();
+        if (result.success) { showToast('تم الإرسال', 'سيتم التواصل معك قريباً', 'success'); contactForm.reset(); }
+        else throw new Error(result.message || 'فشل الإرسال');
+      } catch(err) { showToast('خطأ', err.message, 'error'); }
+      finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال'; }
     });
-  });
+  }
 
-  // contact inner tabs
-  document.querySelectorAll(".contact-tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".contact-tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      const target = tab.getAttribute("data-contact");
-      document.getElementById("inquiryPane").classList.toggle("active", target === "inquiry");
-      document.getElementById("suggestionPane").classList.toggle("active", target === "suggestion");
+  const suggestionForm = document.getElementById('suggestionFormContent');
+  if (suggestionForm) {
+    suggestionForm.addEventListener('submit', async(e) => {
+      e.preventDefault();
+      const btn = suggestionForm.querySelector('button');
+      btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>';
+      try {
+        const res = await fetch('/api/suggestion', {
+          method: 'POST', credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: document.getElementById('suggestionName').value,
+            contact: document.getElementById('suggestionContact').value,
+            message: document.getElementById('suggestionMessage').value
+          })
+        });
+        const result = await res.json();
+        if (result.success) { showToast('شكراً!', 'تم استلام اقتراحك', 'success'); suggestionForm.reset(); }
+        else throw new Error(result.message || 'فشل الإرسال');
+      } catch(err) { showToast('خطأ', err.message, 'error'); }
+      finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lightbulb"></i> إرسال'; }
     });
-  });
+  }
 
-  document.getElementById("applyCouponBtn").addEventListener("click", applyCouponLogic);
-  renderProducts();
-  updateTotalUI();
+  function showToast(title, msg, type='success'){ let c=document.getElementById('toastContainer'), t=document.createElement('div'); t.className=`toast ${type}`; t.innerHTML=`<div class="toast-icon"><i class="fas ${type==='success'?'fa-check-circle':'fa-exclamation-circle'}"></i></div><div class="toast-text"><div class="toast-title">${title}</div><div class="toast-msg">${msg}</div></div><button class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>`; c.appendChild(t); setTimeout(()=>{ if(t.parentElement) t.remove(); },5000); }
+  document.addEventListener('contextmenu', e=>e.preventDefault());
+  document.addEventListener('keydown', e=>{ if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&['I','J'].includes(e.key))||(e.ctrlKey&&e.key==='U')) e.preventDefault(); });
 </script>
 </body>
 </html>

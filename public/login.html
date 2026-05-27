@@ -2,246 +2,412 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>تسجيل الدخول - لوحة تحكم ABO MALEK STORE</title>
   <link rel="icon" href="https://i.postimg.cc/X799S1LZ/ABO-MALEK.jpg" type="image/png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root {
-      --primary: #1a1a2e;
-      --secondary: #f5a623;      /* اللون الذهبي الأساسي من المتجر */
-      --secondary-dark: #c47d0e;
-      --accent: #2ec4b6;          /* لون مميز ثانوي */
-      --dark: #16213e;
-      --light: #f8f9fa;
-      --success: #25D366;
-      --danger: #e63946;
-      --warning: #ffc107;
-      --gray: #6c757d;
-      --border-radius: 12px;
-      --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      --transition: all 0.3s ease;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* CSS Variables for Light/Dark mode */
+    :root {
+      /* Light Mode (default) */
+      --bg-gradient-start: #f0f2f8;
+      --bg-gradient-end: #e8ecf4;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --card-border: rgba(0, 0, 0, 0.08);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --input-bg: #ffffff;
+      --input-border: #e2e8f0;
+      --input-focus-bg: #ffffff;
+      --placeholder-color: #94a3b8;
+      --accent: #3b82f6;
+      --secondary: #f97316;
+      --secondary-light: #fb923c;
+      --danger: #ef4444;
+      --success: #10b981;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+      --btn-gradient: linear-gradient(135deg, #f97316, #ea580c);
+      --btn-hover-gradient: linear-gradient(135deg, #fb923c, #f97316);
+      --icon-color: #94a3b8;
+      --toggle-bg: #f1f5f9;
+      --toggle-border: #e2e8f0;
+      --password-toggle-bg: transparent;
+      --password-toggle-hover-bg: rgba(0, 0, 0, 0.05);
+    }
+
+    body.dark {
+      /* Dark Mode */
+      --bg-gradient-start: #0f0f1a;
+      --bg-gradient-end: #0a0a14;
+      --card-bg: rgba(18, 18, 30, 0.96);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e6;
+      --input-bg: rgba(30, 30, 45, 0.9);
+      --input-border: rgba(255, 255, 255, 0.15);
+      --input-focus-bg: rgba(40, 40, 60, 0.95);
+      --placeholder-color: #64748b;
+      --accent: #38bdf8;
+      --secondary: #f97316;
+      --secondary-light: #fb923c;
+      --danger: #ef4444;
+      --success: #10b981;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.6);
+      --btn-gradient: linear-gradient(135deg, #f97316, #ea580c);
+      --btn-hover-gradient: linear-gradient(135deg, #fb923c, #f97316);
+      --icon-color: #94a3b8;
+      --toggle-bg: #1e1e2e;
+      --toggle-border: #334155;
+      --password-toggle-bg: transparent;
+      --password-toggle-hover-bg: rgba(255, 255, 255, 0.1);
+    }
 
     body {
       font-family: 'Tajawal', sans-serif;
-      background-color: #0f0f1a;
-      background-image: radial-gradient(circle at 25% 25%, rgba(22, 33, 62, 0.8) 0%, rgba(10, 10, 20, 1) 100%);
-      color: #fff;
+      background: radial-gradient(circle at 25% 30%, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+      color: var(--text-primary);
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       padding: 20px;
       line-height: 1.6;
+      transition: background 0.3s ease, color 0.2s ease;
+    }
+
+    /* Animated background effect */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        repeating-linear-gradient(90deg, var(--secondary) 0px, var(--secondary) 1px, transparent 1px, transparent 60px),
+        repeating-linear-gradient(0deg, var(--accent) 0px, var(--accent) 1px, transparent 1px, transparent 60px);
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .login-container {
-      background: rgba(26, 26, 46, 0.8);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: var(--border-radius);
-      padding: 40px;
-      width: 100%;
-      max-width: 450px;
-      box-shadow: var(--box-shadow);
-      border: 1px solid rgba(245, 166, 35, 0.2);
-      transform: translateY(0);
-      transition: var(--transition);
-      text-align: center;
       position: relative;
-      overflow: hidden;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 32px;
+      padding: 42px 38px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--card-border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      z-index: 1;
+      animation: fadeInUp 0.6s ease-out;
     }
 
+    .login-container:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Glowing border effect */
     .login-container::before {
       content: '';
       position: absolute;
       top: 0;
       right: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(to left, var(--secondary), var(--accent));
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--secondary), var(--accent), transparent);
+      border-radius: 32px 32px 0 0;
     }
 
-    .login-container:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    .logo {
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-
-    .logo { margin-bottom: 30px; display: flex; flex-direction: column; align-items: center; }
 
     .logo img {
-      width: 80px;
-      height: 80px;
+      width: 85px;
+      height: 85px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid rgba(245, 166, 35, 0.3);
-      box-shadow: 0 4px 15px rgba(245, 166, 35, 0.2);
-      margin-bottom: 15px;
-      transition: var(--transition);
+      border: 3px solid var(--secondary);
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+      margin-bottom: 18px;
+      transition: all 0.3s ease;
     }
 
     .logo img:hover {
       transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(245, 166, 35, 0.3);
+      box-shadow: 0 12px 28px rgba(249, 115, 22, 0.5);
     }
 
     .login-container h2 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      color: #fff;
+      font-size: 1.9rem;
+      margin-bottom: 8px;
       font-weight: 800;
-      background: linear-gradient(to right, var(--secondary), #ffcd7e);
-      background-clip: text;
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
     }
 
     .login-container p {
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 30px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
       font-size: 0.95rem;
     }
 
-    .form-group { margin-bottom: 25px; text-align: right; }
+    /* Dark Mode Toggle Button */
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: var(--toggle-bg);
+      border: 1px solid var(--toggle-border);
+      border-radius: 40px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .theme-toggle:hover {
+      background: var(--secondary);
+      color: #fff;
+      border-color: var(--secondary);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      text-align: right;
+    }
 
     .form-group label {
       display: block;
       margin-bottom: 10px;
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--text-primary);
       font-weight: 600;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
     }
 
-    .input-group { position: relative; margin-bottom: 5px; }
+    .input-group {
+      position: relative;
+    }
 
-    .input-group i {
+    .input-group > i:first-of-type {
       position: absolute;
-      left: 15px;
+      right: 16px;
       top: 50%;
       transform: translateY(-50%);
-      color: rgba(255, 255, 255, 0.7);
-      transition: var(--transition);
+      color: var(--icon-color);
+      transition: all 0.2s ease;
+      font-size: 1rem;
+      pointer-events: none;
+      z-index: 1;
     }
 
+    /* Password Toggle Button - مُحسّن ليكون ظاهراً على جميع الأجهزة */
+    .password-toggle {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--password-toggle-bg);
+      border: none;
+      cursor: pointer;
+      color: var(--icon-color);
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+      padding: 8px 10px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      z-index: 2;
+    }
+
+    .password-toggle:hover {
+      background: var(--password-toggle-hover-bg);
+      color: var(--secondary);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .password-toggle:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    /* Adjust input padding to accommodate both icons */
     .form-control {
       width: 100%;
-      padding: 14px 15px 14px 45px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(245, 166, 35, 0.3);
-      border-radius: var(--border-radius);
-      color: #fff;
+      padding: 14px 48px 14px 52px;
+      background: var(--input-bg);
+      border: 1.5px solid var(--input-border);
+      border-radius: 20px;
+      color: var(--text-primary);
       font-family: 'Tajawal', sans-serif;
-      transition: var(--transition);
+      transition: all 0.25s ease;
       font-size: 1rem;
     }
 
     .form-control:focus {
       outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.2);
-      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+      background: var(--input-focus-bg);
+    }
+
+    .form-control:focus + i:first-of-type {
+      color: var(--secondary);
     }
 
     .form-control::placeholder {
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 0.95rem;
+      color: var(--placeholder-color);
+      font-size: 0.9rem;
     }
 
     .btn {
       width: 100%;
-      padding: 15px;
-      background: linear-gradient(to left, var(--secondary-dark), var(--secondary), #ffcd7e);
-      color: #000;
+      padding: 15px 20px;
+      background: var(--btn-gradient);
+      color: white;
       border: none;
-      border-radius: var(--border-radius);
+      border-radius: 30px;
       font-family: 'Tajawal', sans-serif;
       font-weight: 800;
       font-size: 1.05rem;
       cursor: pointer;
-      transition: var(--transition);
-      margin-top: 15px;
-      box-shadow: 0 4px 15px rgba(245, 166, 35, 0.3);
+      transition: all 0.25s ease;
+      margin-top: 12px;
+      box-shadow: 0 6px 18px rgba(249, 115, 22, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       position: relative;
       overflow: hidden;
-      z-index: 1;
     }
 
     .btn::before {
       content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(to left, var(--secondary), var(--secondary-dark));
-      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--btn-hover-gradient);
       opacity: 0;
       transition: opacity 0.3s;
     }
 
     .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(245, 166, 35, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(249, 115, 22, 0.5);
     }
 
-    .btn:hover::before { opacity: 1; }
-    .btn:active { transform: translateY(0); }
-    .btn i { margin-left: 8px; }
+    .btn:hover::before {
+      opacity: 1;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn span, .btn i {
+      position: relative;
+      z-index: 1;
+    }
 
     .forgot-password {
-      display: block;
+      display: inline-block;
       text-align: center;
       margin-top: 20px;
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: var(--transition);
+      font-size: 0.85rem;
+      transition: all 0.2s;
       position: relative;
     }
 
     .forgot-password::after {
       content: '';
       position: absolute;
-      bottom: -2px; right: 0;
+      bottom: -3px;
+      right: 0;
       width: 0;
-      height: 1px;
-      background: var(--accent);
-      transition: var(--transition);
+      height: 1.5px;
+      background: var(--secondary);
+      transition: width 0.2s ease;
     }
 
-    .forgot-password:hover { color: var(--accent); }
-    .forgot-password:hover::after { width: 100%; }
+    .forgot-password:hover {
+      color: var(--secondary);
+    }
 
+    .forgot-password:hover::after {
+      width: 100%;
+    }
+
+    /* Alert Styles */
     .alert {
-      padding: 15px;
-      border-radius: var(--border-radius);
-      margin-bottom: 25px;
+      padding: 14px 18px;
+      border-radius: 20px;
+      margin-bottom: 24px;
       display: none;
       align-items: center;
       justify-content: space-between;
-      animation: fadeIn 0.5s ease-out;
-      position: relative;
-      overflow: hidden;
+      animation: slideDown 0.4s ease-out;
+      font-size: 0.9rem;
+      font-weight: 500;
     }
-
-    .alert::before { content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%; }
 
     .alert-danger {
-      background-color: rgba(230, 57, 70, 0.15);
-      color: #ff8a92;
-      border: 1px solid rgba(230, 57, 70, 0.3);
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #f87171;
     }
-    .alert-danger::before { background-color: var(--danger); }
+
+    body.dark .alert-danger {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+    }
 
     .alert-success {
-      background-color: rgba(46, 196, 182, 0.15);
-      color: #6ee7de;
-      border: 1px solid rgba(46, 196, 182, 0.3);
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
     }
-    .alert-success::before { background-color: var(--success); }
+
+    body.dark .alert-success {
+      background: rgba(16, 185, 129, 0.2);
+      color: #6ee7b7;
+    }
 
     .close-alert {
       background: none;
@@ -249,52 +415,109 @@
       color: inherit;
       cursor: pointer;
       font-size: 1.2rem;
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      transition: var(--transition);
+      transition: background 0.2s;
     }
 
-    .close-alert:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
-
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
-
-    .login-container { animation: fadeIn 0.6s ease-out; }
-
-    @media (max-width: 480px) {
-      .login-container { padding: 30px 20px; }
-      .login-container h2 { font-size: 1.6rem; }
-      .form-control { padding: 12px 15px 12px 40px; }
+    .close-alert:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
 
-    .form-control:focus + i { color: var(--accent) !important; transform: translateY(-50%) scale(1.1); }
-
+    /* Spinner */
     .spinner {
       display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(0, 0, 0, 0.3);
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
-      border-top-color: #000;
-      animation: spin 1s ease-in-out infinite;
-      margin-left: 8px;
+      border-top-color: white;
+      animation: spin 0.7s linear infinite;
       vertical-align: middle;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 520px) {
+      .login-container {
+        padding: 32px 20px;
+        max-width: 95%;
+      }
+      .login-container h2 {
+        font-size: 1.6rem;
+      }
+      .form-control {
+        padding: 12px 42px 12px 46px;
+        font-size: 0.95rem;
+      }
+      .theme-toggle {
+        top: 12px;
+        left: 12px;
+        padding: 6px 12px;
+        font-size: 0.75rem;
+      }
+      .password-toggle {
+        width: 34px;
+        height: 34px;
+        left: 12px;
+        font-size: 1rem;
+      }
+      .input-group > i:first-of-type {
+        right: 12px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Touch-friendly for mobile devices */
+    @media (max-width: 768px) {
+      .password-toggle {
+        padding: 10px 12px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="login-container">
+    <!-- Dark Mode Toggle Button -->
+    <button class="theme-toggle" id="darkModeToggle" aria-label="تبديل الوضع المظلم">
+      <i class="fas fa-moon"></i> 
+      <span>داكن</span>
+    </button>
+
     <div class="logo">
-      <img src="https://i.postimg.cc/X799S1LZ/ABO-MALEK.jpg" alt="ABO MALEK STORE Logo">
+      <img src="https://i.postimg.cc/X799S1LZ/ABO-MALEK.jpg" alt="ABO MALEK STORE">
       <h2>تسجيل الدخول</h2>
     </div>
-    <p>الرجاء إدخال بيانات الاعتماد الخاصة بك للوصول إلى لوحة تحكم ABO MALEK STORE</p>
+    <p>مرحباً بك في لوحة التحكم | أدخل بياناتك للوصول</p>
     
     <div id="alertBox" class="alert alert-danger" style="display: none;">
       <span id="alertMessage"></span>
@@ -306,7 +529,7 @@
         <label for="username">اسم المستخدم</label>
         <div class="input-group">
           <i class="fas fa-user"></i>
-          <input type="text" id="username" class="form-control" placeholder="أدخل اسم المستخدم" required />
+          <input type="text" id="username" class="form-control" placeholder="أدخل اسم المستخدم" required autocomplete="username" />
         </div>
       </div>
       
@@ -314,54 +537,125 @@
         <label for="password">كلمة المرور</label>
         <div class="input-group">
           <i class="fas fa-lock"></i>
-          <input type="password" id="password" class="form-control" placeholder="أدخل كلمة المرور" required />
+          <input type="password" id="password" class="form-control" placeholder="أدخل كلمة المرور" required autocomplete="current-password" />
+          <button type="button" class="password-toggle" id="togglePasswordBtn" aria-label="إظهار/إخفاء كلمة المرور" title="إظهار/إخفاء كلمة المرور">
+            <i class="fas fa-eye"></i>
+          </button>
         </div>
       </div>
       
-      <button type="submit" class="btn">
-        <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+      <button type="submit" class="btn" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i> 
+        <span>تسجيل الدخول</span>
       </button>
       
-      <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+      <a href="https://wa.me/201274445091" class="forgot-password" id="forgotLink">نسيت كلمة المرور؟</a>
     </form>
   </div>
 
   <script>
+    // === Password Toggle Functionality - Improved for all devices ===
+    const passwordInput = document.getElementById('password');
+    const toggleBtn = document.getElementById('togglePasswordBtn');
+    const toggleIcon = toggleBtn.querySelector('i');
+
+    toggleBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      
+      if (type === 'text') {
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+        toggleBtn.setAttribute('aria-label', 'إخفاء كلمة المرور');
+      } else {
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+        toggleBtn.setAttribute('aria-label', 'إظهار كلمة المرور');
+      }
+    });
+
+    // === Dark Mode System ===
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const themeIcon = darkModeToggle.querySelector('i');
+    const themeText = darkModeToggle.querySelector('span');
+
+    // Load saved theme
+    if (localStorage.getItem('adminTheme') === 'dark') {
+      document.body.classList.add('dark');
+      themeIcon.classList.remove('fa-moon');
+      themeIcon.classList.add('fa-sun');
+      themeText.textContent = 'فاتح';
+    } else {
+      document.body.classList.remove('dark');
+      themeIcon.classList.remove('fa-sun');
+      themeIcon.classList.add('fa-moon');
+      themeText.textContent = 'داكن';
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem('adminTheme', isDark ? 'dark' : 'light');
+      
+      if (isDark) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+        themeText.textContent = 'فاتح';
+      } else {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+        themeText.textContent = 'داكن';
+      }
+    });
+
+    // Alert functions
     function showAlert(type, message) {
       const alertBox = document.getElementById('alertBox');
       const alertMessage = document.getElementById('alertMessage');
       alertBox.className = `alert alert-${type}`;
       alertMessage.textContent = message;
       alertBox.style.display = 'flex';
-      setTimeout(() => { if (alertBox.style.display === 'flex') closeAlert(); }, 5000);
+      
+      setTimeout(() => {
+        if (alertBox.style.display === 'flex') closeAlert();
+      }, 5000);
     }
 
     function closeAlert() {
       const alertBox = document.getElementById('alertBox');
-      alertBox.style.animation = 'fadeIn 0.3s reverse';
+      alertBox.style.animation = 'slideDown 0.2s reverse';
       setTimeout(() => {
         alertBox.style.display = 'none';
-        alertBox.style.animation = 'fadeIn 0.5s ease-out';
-      }, 300);
+        alertBox.style.animation = '';
+      }, 200);
     }
 
+    // Forgot password handling
+    document.getElementById('forgotLink').addEventListener('click', () => {
+      showAlert('success', 'جاري تحويلك إلى واتساب...');
+      setTimeout(() => {
+        window.location.href = "https://wa.me/201274445091";
+        }, 1000);
+    });
+
+    // Login form handler (original endpoint preserved: /api/admin/login)
     document.getElementById("loginForm").addEventListener("submit", async function (e) {
       e.preventDefault();
-      const username = document.getElementById("username").value;
+      const username = document.getElementById("username").value.trim();
       const password = document.getElementById("password").value;
 
       if (!username || !password) {
-        showAlert('danger', 'الرجاء إدخال جميع الحقول المطلوبة');
+        showAlert('danger', '⚠️ الرجاء إدخال جميع الحقول المطلوبة');
         return;
       }
 
-      const btn = e.target.querySelector('button[type="submit"]');
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '<span class="spinner"></span> جاري التحقق...';
+      const btn = document.getElementById('loginBtn');
+      const originalHTML = btn.innerHTML;
       btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> <span>جاري التحقق...</span>';
 
       try {
-        // استخدام المسار الصحيح المتوقع من الخلفية
         const res = await fetch("/api/admin/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -372,40 +666,44 @@
         const data = await res.json();
 
         if (data.success) {
-          showAlert('success', 'تم تسجيل الدخول بنجاح، جاري التوجيه إلى لوحة التحكم...');
-          setTimeout(() => { window.location.href = "/dashboard"; }, 1500);
+          showAlert('success', '✅ تم تسجيل الدخول بنجاح، جاري التوجيه...');
+          setTimeout(() => {
+            window.location.href = "dashboard";
+          }, 1400);
         } else {
           throw new Error(data.message || "بيانات الاعتماد غير صحيحة");
         }
       } catch (error) {
         console.error("Login error:", error);
-        let errorMsg = error.message;
-        if (errorMsg.includes("Failed to fetch") || errorMsg.includes("NetworkError")) {
-          errorMsg = "تعذر الاتصال بالخادم. تأكد من تشغيل الخادم الخلفي.";
-        }
-        showAlert('danger', "فشل تسجيل الدخول: " + errorMsg);
+        showAlert('danger', "❌ فشل تسجيل الدخول: " + (error.message || "خطأ في الاتصال بالخادم"));
       } finally {
-        btn.innerHTML = originalText;
         btn.disabled = false;
+        btn.innerHTML = originalHTML;
       }
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const inputs = document.querySelectorAll('.form-control');
-      inputs.forEach(input => {
-        input.addEventListener('focus', () => {
-          input.parentElement.querySelector('i').style.color = 'var(--accent)';
-          input.parentElement.querySelector('i').style.transform = 'translateY(-50%) scale(1.1)';
-        });
-
-        input.addEventListener('blur', () => {
-          input.parentElement.querySelector('i').style.color = 'rgba(255, 255, 255, 0.7)';
-          input.parentElement.querySelector('i').style.transform = 'translateY(-50%) scale(1)';
-        });
+    // Interactive icon effect on inputs
+    const inputs = document.querySelectorAll('.form-control');
+    inputs.forEach(input => {
+      input.addEventListener('focus', () => {
+        const icon = input.parentElement.querySelector('i:first-of-type');
+        if (icon) icon.style.color = 'var(--secondary)';
       });
-
-      document.querySelector('.login-container').style.animation = 'pulse 1.5s ease-in-out';
+      input.addEventListener('blur', () => {
+        const icon = input.parentElement.querySelector('i:first-of-type');
+        if (icon) icon.style.color = 'var(--icon-color)';
+      });
     });
+
+    // Enter key support
+    if (passwordInput) {
+      passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+        }
+      });
+    }
   </script>
 </body>
 </html>
